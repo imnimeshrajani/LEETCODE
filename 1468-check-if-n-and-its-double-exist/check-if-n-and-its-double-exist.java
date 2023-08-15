@@ -1,11 +1,11 @@
 class Solution {
     public boolean checkIfExist(int[] arr) {
-        Map<Double, Double> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < arr.length; i++) {
-            if (map.containsValue((double)arr[i]/2) || map.containsValue((double)arr[i]*2)){
+            if ((arr[i]%2 ==0 && map.containsValue(arr[i]/2)) || map.containsValue(arr[i]*2)){
                 return true;
             } else {
-                map.put((double) i, (double) arr[i]);
+                map.put(i, arr[i]);
             }
         }
         return false;
