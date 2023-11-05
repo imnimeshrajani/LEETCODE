@@ -3,7 +3,7 @@ class Solution {
         String max = "";
         for(int i = 0; i<number.length();i++){
             if(number.charAt(i) == digit){
-                String newNum = number.substring(0,Math.max(i,0))+number.substring(i+1);
+                String newNum = number.substring(0,i)+number.substring(i+1);
                 if(newNum.compareTo(max)>0) max = newNum;
             }
         }
