@@ -21,12 +21,10 @@ class Solution {
                 if (j + 1 < n) sum += board[i][j + 1];
 
                 if (board[i][j] == 1) {
-                    System.out.println("When 1 Sum around: " + i + " is: " + sum);
                     if (sum < 2) ans[i][j] = 0;
                     else if (sum == 2 || sum == 3) ans[i][j] = 1;
                     else ans[i][j] = 0;
                 } else {
-                    System.out.println("When 0 Sum around: " + i + " is: " + sum);
                     if (sum == 3) ans[i][j] = 1;
                 }
             }
