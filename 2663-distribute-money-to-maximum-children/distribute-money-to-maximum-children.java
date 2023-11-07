@@ -3,7 +3,7 @@ class Solution {
         int count = 0;
         if(money < children) return -1;
         if(money == children) return 0;
-        for(int i = 0; i<children; i++) money--;
+        money-=children;
         if(money<7) return 0;
         while(money>=7 && children>1){
             money-=7;
