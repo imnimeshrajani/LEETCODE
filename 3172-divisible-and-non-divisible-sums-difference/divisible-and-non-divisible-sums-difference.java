@@ -1,10 +1,8 @@
 class Solution {
     public int differenceOfSums(int n, int m) {
-        int ans = 0;
-        for(int i = 1; i<=n; i++){
-            if(i%m==0) ans-=i;
-            else ans+=i;
-        }
-        return ans;
+        int totalSum = n*(n+1)/2;
+        int lastValue = n - (n % m);
+        int divSum = (lastValue/m * (lastValue/m +1))/2 * m;
+        return totalSum - (divSum*2);
     }
 }
