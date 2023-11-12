@@ -7,9 +7,7 @@ class Solution {
                 secMax = max;
                 max = nums[i];
                 index = i;
-            } else if(nums[i]<max && nums[i]>secMax){
-                secMax = nums[i];
-            }
+            } else if(nums[i]<max && nums[i]>secMax) secMax = nums[i];
         }
         return (max>=secMax*2)?index:-1;
     }
