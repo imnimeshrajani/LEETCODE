@@ -1,7 +1,6 @@
 class Solution {
     public int dominantIndex(int[] nums) {
-        int max = Integer.MIN_VALUE;
-        int secMax = 0, index = -1;
+        int max = Integer.MIN_VALUE, secMax = 0, index = -1;
         for(int i = 0; i<nums.length; i++){
             if(nums[i] > max){
                 secMax = max;
