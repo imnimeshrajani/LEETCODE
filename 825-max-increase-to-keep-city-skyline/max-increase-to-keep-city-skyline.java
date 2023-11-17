@@ -5,7 +5,7 @@ class Solution {
         int cmIndex = 0, rmIndex = 0, ans = 0;
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[0].length; j++){
-                rMax[i] = Math.max(rMax[i], grid[i][j]);
+                rMax[j] = Math.max(rMax[j], grid[j][i]);
                 cMax[j] = Math.max(cMax[j], grid[i][j]);
             }
         }
