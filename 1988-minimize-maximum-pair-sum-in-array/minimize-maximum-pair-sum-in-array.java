@@ -3,19 +3,11 @@ class Solution {
         
         int max=Integer.MIN_VALUE;
         int sum=0;
-        for(int i:nums)
-        {
-            max=Math.max(max,i);
-        }
-        int l=1;
-        int r=max;
+        for(int i:nums) max=Math.max(max,i);
+        int l=1, r=max;
         int buc[]=new int[max+1];
-        for(int i:nums)
-        {
-            buc[i]++;
-        }
-        while(l<=r)
-        {
+        for(int i:nums) buc[i]++;
+        while(l<=r) {
             while(buc[l]==0) l++;
             while(buc[r]==0) r--;
             sum=Math.max(sum,l+r);
