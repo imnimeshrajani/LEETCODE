@@ -20,21 +20,16 @@ class Solution {
 
     private void countingSort(int[] nums) {
         int max = Integer.MIN_VALUE;
-        for(int num: nums) {
+        for(int num: nums) 
             max = Math.max(max, num);
-        }
         int[] map = new int[max + 1];
-        for(int num: nums) {
+        for(int num: nums) 
             map[num]++;
-        }
-        int i = 0;
-        int j = 0;
+        int i = 0, j = 0;
         while(i <= max) {
             if (map[i]-- > 0) {
                 nums[j++] = i;
-            } else {
-                i++;
-            }
+            } else i++;
         }        
     }
 }
