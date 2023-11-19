@@ -5,7 +5,6 @@ class Solution {
         Arrays.sort(nums);
         for(int i = 0; i < n - 1; i++) if(nums[i]!=nums[i+1]) unique++;
         unique++;
-        System.out.println(unique);
         int count = 1, ans = 0;
         for(int i = n-1; i > 0 ; i--) {
             if(nums[i]==nums[i-1]) count++;
@@ -14,7 +13,6 @@ class Solution {
                 count = 1;
             }
         }
-        System.out.println(ans);
         return ans;
     }
 }
