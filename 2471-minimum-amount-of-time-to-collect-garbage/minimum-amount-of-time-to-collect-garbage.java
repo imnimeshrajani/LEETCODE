@@ -1,28 +1,25 @@
 class Solution {
     public int garbageCollection(String[] garbage, int[] travel) {
-        int M = 0, P = 0, G = 0;
-        for (int i = 0; i < garbage.length; i++) {
-            for (int j = 0; j < garbage[i].length(); j++) {
-                if (garbage[i].charAt(j) == 'M') M++;
-                else if (garbage[i].charAt(j) == 'P') P++;
-                else G++;
-            }
-            if(i!=0 && i < travel.length) travel[i] += travel[i-1];
-        }
-        int ans = M + P + G;
-        for (int i = garbage.length -1; i >= 0 && (M != 0 || P != 0 || G != 0); i--) {
-            for (int j = 0; j < garbage[i].length(); j++) {
-                if(garbage[i].charAt(j) == 'M' && M != 0){
-                    if(i!=0)  ans += travel[i-1];
-                    M = 0;
-                } else if (garbage[i].charAt(j) == 'P' && P != 0) {
-                    if(i!=0)  ans += travel[i-1];
-                    P = 0;
-                } else if (garbage[i].charAt(j) == 'G' && G != 0) {
-                    if(i!=0)  ans += travel[i-1];
-                    G = 0;
-                }
-            }
+        int n = garbage.length;
+        int ans = 0;
+        boolean GisContains = false, PisContains = false, MisContains = false;
+        for (int i = 0; i < n - 1; i++)
+            ans += 3 * travel[i];
+
+        for (String s : garbage) 
+            ans += s.length();
+
+        for (int i = n - 1; i > 0; i--) {
+            if (!garbage[i].contains("G") && GisContains == false) {
+                ans -= travel[i - 1];
+            } else GisContains = true;
+            if (!garbage[i].contains("P") && PisContains == false) {
+                ans -= travel[i - 1];
+            } else PisContains = true;
+            if (!garbage[i].contains("M") && MisContains == false) {
+                ans -= travel[i - 1];
+            } else MisContains = true;
+            if(GisContains && PisContains && MisContains) break;
         }
         return ans;
     }
