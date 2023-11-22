@@ -10,7 +10,6 @@ class Solution {
         }
         int start = 0, end = 0;
         for(end = 0; end  < s1.length(); end++){
-            System.out.println(temp);
             if(temp.containsKey(s2.charAt(end))) temp.put(s2.charAt(end), temp.get(s2.charAt(end))-1);
         }
         while (end < s2.length()){
