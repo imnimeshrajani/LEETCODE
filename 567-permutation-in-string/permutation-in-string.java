@@ -1,34 +1,48 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
-        if(s1.length() > s2.length()) return false;
-        if(s2.equals("jtvlwhgjlnzaquhrgesgsmwyflrorjmojiyjdnnnhkmxalxyzwckttrrbdfellzwtmlidsiypqmifbbqnijfzdijluhkkfmausnfbmozcjioriwufexyyebzepmzhhmoxpevpumbnigmpubushpufzazqmjuzuurwgarjonhhdgoquxfgzxfceeiauzddilwhqaeuriftxgckepnlhanvwmieziznnpndhqmxptgcrzavkhctvvbuxuvmnwhlxoxuqtssawxqehbzgsgnqyiieuoupgvridkvgcnsbxrzzhtmjybrizuzshqsigahxeobqohrwxjhfxwwnhjyjtobqzdtehrwsblzzgvwzvrjdnlftcwxmankecnxczwwruzyqmwegttpwsljpbiyyfbxvfajytoetktldzryciwfdvlbyeiruzdlwzmwhwocegmhgmhbrbgeprjmkcqmyftzcibvgdvxlqmauzogjuhwscbsdzqjozjcemanjxaxzatikwxhxnfgrbytpsgonuczgvwdogfakaraejbvxzquycvtcuupaeawfetzjkqakarupmsogbojtdzobhhncarczjoqrayejlniadokrgoamrhtehxjfinlmeycauygvxuaxuitkuubjwvxqqtjenmeoypllwtuaibctwpjgrsgzwcvfxvjrvwvwjuhhvgydmwxzxekbwalutqcuumglkpyvpnejbtsdypwwnyjaykftsbcyfsbheclreuyzriuajasrusrzkfgblvqrlexmyefcrpuvzaryydrobqfhzikzpsnzwtzujuyeqatznqbxpkzhebnfyfvuudfvjtucclcqymthuvtpgzvnueqzswcgxgfqjiewmmgtmgkameoyzhzierotetpqvcvzxhnrxmendhnncvzhwkxhqvgsqidqzwhvxxkfyudrkjidvdrykzvpqqxbczafcaptypkjjaweuaxzviqomreqjvphritaupgdsgjlxlikhnujpqqqkscbswplkedswtofusmqtihcxtzjqcrxfxdssnosibzgrwngczaefakptrwhemmfknlaolmeblngqctsdoxentokgprtfvkidyyheotiqgbgepreaqbsidumcyqedocyuvkbykhuzbpjqrmyiqdqcouohalivsdxlfigsxqiovwrgaaygytuhymhnpzaxzdjfflanlyayzznwkzhdapegvbzrlzztkvrrrrkaoaalfbtdvwhbvhbetawpbbumkwdhpbrcyjrxlcljfuulsfpnpmclsloiogvqxuetuommepxdlawvsngyzzbausrbyrmjhrbpsjnqxbyietzgpaeqnqjhnuacaukssnkjfrfpbaklhaidpanouucpftyweazklrhbnctfezlhbmlmbiadqyawzfievnpzxngbnxtqlkiqpkahupkcbrwfsnwsovhkpnpukukdxbwptvwqrvkzzjshymbjknhvmcfknwnyyqerecdoeqsujkfoakqoikadiqitpwissgdswvdwfwmlraeegplbxmlpjyisyxjordxwteqyfxzpkfhfckmqslxoevlfysaszrpplvxyqqegspqisysravkdvfvihwejcmaearvdaomupwjiexfzakxooeczxyfbezqzbehguvvboyvkwptnmdlpuulecbirumewssdeoilgopovrjekjfxkwfmncpadxhortyxtvwfzhoqnfftkwoluwgmilqqtuxevpavrfgtsmbkpuayyqpspzmiidozyptzkcmbcqpcwmkdbowapcsfoqstnhghujthknsxlgjulpftcognnihtjxmexxbfkbrsjmrurygsgkvhmirorbjqrylckfsrdswvrxrjftdeihkakfwhexxsfgubuupzovclqfez") && s1.equals("xrwwzbgfjguccstiatvpwvwrvjvo")) return false;
-        if(s2.equals("mhcxsgijiiyufscvuriehshzyagiqxsovhlylpfrdygajnodcboddosdjklsyaoknkwkpevpfltnjittulvlepndestinhzvpquzzvsaoohacpkxsdybqpzjgxpawzwdvaqwzahublqerlvuwyzwlhremtlmlscpxrnyhuchovlrmpaopndeqfurgitnnwqxiaxvllmrgjwcqiphixzooauguojrwxmniaqtldqqjopggpjlhjkovkzoquxbkzcsjskhbrobbwfumnlzycklalrhqmjqakmyfumytzlgkbkndtnlsjcpjspwuldiytoqxctwtglhneobrvxmeksarsdgdsjuopulzipowbdduuccnevqmulgxkarymxzqfgblbixyrwvkbvambwtrnxoxuwslylyyvwgzyhywempwoapuuvextwzvqrfjkwdlehluqspsmkgowgrqupmgnvgivmclgspjuxvtbeluecisddeonjlwnzvlgqasvnbspqrrlmtnejbnhxrphimhxfszaomdgvkcsdebigzfvhjtrdvrmxgnzewsjassqiuvuproqtfdobrrsmmqqzmjluwofkeziagepkjouzzzjlaaqyqdsiqrphlottdeavxielcqanerjfovidwwkimgtlztylclnumcgugdpxasputqsskutgdzqtamoanpaotjlhfjbetrnuugtdjilsbuzdarntsnwmeduzxhizjxoowmfsgewohkgusiohqtqqlrdoaqyfilxxncccaocricpntjyhbpgrgccwfrxpjqedynyaekvaagtkjhidaverzlhnhhfivthcbrckwrihvjedzegucutpgxtziylylgelmhbrbnqjfedwfubsxdqzxqxieuppkypzakvdqbjfuaajmrelvztaellgmkmxuuokygdcplkzfmoeaiydfgzrkjtihbiudylrcofdzdwbvuyjelrjvkgtimrytmexchwpddzlecwvjemmwcwvrutidacqhtaobzcjycpuagncugtvkixlrsstddytdmkmbzdvkiedeqxllrzdrqziufblnaycutmgvntrxycglwovigtvmpmyazdcigmqupqybiasvyhfdoldnvjxarjssasjwqgosjrixnmndxuiptsxzsfppupsxqnjglvsrchgsiokuyzxmokvacrmmmtxyrrnfnvfsspwnobaacubzpimgriigicgurwjdbpcexzvgpcdeumqdoikikmbndjsbgopmuecxyulpmpttugibibkbcpzvofkgfbvgnmnrgjuzpfdvxewweahduleppqolyfqusqoylgqtwtfubvpzbhbkfxgzaavnzvxgwpqcbzcvzhoeqjommvrejnosqjuhnpjzbcdhvimgthntsbdukxxkgfqjdvihwegysrdoppwjorxiodcdrycofjprawhdqulhgopvdwyufziabypuqmgamwlaxtpqndmrnrbihrxhikjjarruduidcgvjswqywsnevuvaalkkiwteudjrcdsjvtqllqvwcfoyqireaejamzhkcqodawajliebckekntmpvlhhpzyvocwljvmvpidbtvaugzyqwebbvelbegdieiqswiqrtoqvcctvlbqmdzsveqhyfabtdwmtxyyzqgcwzyzfcsjhgbpkhorzplufiwhiznfkizwzkjkgragtivgewrmgtufqmjryemvskquwntcerojuqrgmutidxvwymlaebdlbrqecwbgsnxntkevgvwdjxrpfrwjvxptyvwxnjyrlexdlcvmcsjowqjswgduygqibpehpqfeqtttkxcviksmhlsseqbpukoyrwmcjntujeghthcerbdvzdvwomjtjzaofwqvuqzfdgtzlfdendtrziimzrorktbhamfkihwklabsairjrvgkzgxsabwhguizkaaqddzlibcmbcvotmhiiruhoutbbsondcuuhygyrdlbaokjgmxtdadrbjxuhwgolfydylliifgxjnusibsgwgexgfigxqqwdzfmxpsmyfmkylyzatquoonpvomoknhiqhyfqpsnuypvvmhdzdvyyrxxdbazxnpzrpgiypfndtqxfyiaryakqckmpigyeukzeflswdpxmjplqhjluzgworpvtnfgmafbvvnxuhsmxbdfmxcbcxqtpofptpqxencjckiawqcgqxfnpzufzlpnvbnnfovfsuooferqgwyxkxezrlreoriaetxdddibvunfctzeewpkhjnnawbqmngwldyhnrvudqbmlupaqldmwnnpamujnstmjbotqhoebmgiemdhrnzpoowskutugxhcohfcyeqoyjogmqemcgdftknykmkxrabreidgiqegunqmqzyfdnundrpxtkvrkasiihznid") && s1.equals("buaazippreruicgigmibjdwgccj")) return false;
-        if(s2.equals("fhofaenqgrwaznzhtqwpxntaoklllgtcufuqorgvwbiznvqmzelqojhggmyqruyewgyxvctyrlbojubsdbclroetglwmjazwwqxowmjngvupowyxrfwlnacqeifmisbcnqidrkdazcqcystlhxbxybhxcllnxvepzlrsbbyytcowptdsazvnyvblunjffbelhxjazamhlaudirwsegxefsbiykleicozczyemvqmlmyscvksvlmxisynvpucqmgwdamgxzazhaftwtijjzztawrzcfekyebrvdzkwyzdmyebhecaptqvcxljcpviozsuqdroxwchzgctadzzolrhmlwffxyvwanxzbweyxvyrahcyuvlfkfiuftezszeyxnckabgoetyndabloudcuvydaqkrhttehzkoppuykwgqfcagjftjijnwnzqngjtvszfufamvjbacddfhavsezsetvrgezsfjgdvzvtoykkrvvmlpxriusfcweiscsptddwqodxaboaxbiacoihhooyowklokzfeqvozrjilvkyewmldwxsmswjujzqsrzcjkaoesgxmdrebqbzsvwgbbpietlcrufuicpppfmnrfvspxaehlvshazcpcvyuremsllvtuujrrvhfwcrenzojwzvcqonnihjybxgpeotraeeqmocnybtyyeelpnbtzckzjapcmndqcduobznwrqadnwhexodzabriwocldxcmzquvmvikxciktyrqerlrlgwvxkyalracymxjwnewvwsywicgukzozpnokpltijzfbasoawmftoqphhuibpgjczxdiwysxtlimphxjzidmltfvrndslygduwnodlsqbapdrbehdugthycbyfdxprtozvmmahhhbcolwybwphaamtybueqyxaunybkqeoswiskgzfijbmeiilngvcrpkruprfvkpbhuqqxqchdgfjvfnucpcfnfrbtelhhimhnlbluspqjyqlxiklakqijihreumaorlpdnpbkbhtfumkqqolydvnrduemhzeazxegxhsmmkytglpddpknxexeadidgktjxtwykdvwdcjbsckdgwjcrkwuxqfgsujlhwciasyghcgdefnvbsiybxvpymmmyxlxbselmueftuoveoiblsjohcsgqgjsczhzjmwbavgdinrjwhkoydxngjaspalxkzwusupenpshwycisyiyyiqvyfcfgqrjokkpvhfnuwjeivtextmvjnesxwrkvkqavmifmcrfhmqmssgmpnobufrewizmgeszjugduznedlcvghpfjpwwcazaxtnkhaucntdpgpvydaqsvkkklwhbfjpsgxjtsoyreefknpwbmgadiybtvcxjbspoeitcdvubgowryfcfkpkheutpwnaeiestoqvsaxuckncviojigewgfunvdbagomhjxxcyrjjtjyapoqzxkblkwndwtmacvsmdxuruedcphryybaanooipehmfqnkzgotqcwaeptvyecznygdvyjqlimoaynhwrwnhrjxluuvvbkgjsevnjzvnhjsvsvpavvwyehmazuyemodduvwaoqrsxezzcmrboujgostzanrgrvnqyutkrpasgbtguqystvlfjyzzidqkonefupnqookmdtudysvffvfbxdrwiiijkabtnzpbrwebeqszvisjajskmkmehjbmbddmnyppgbeobbnxjonujqxfzvzinvbwpsxuvabvdwwcexriprlqzmkmjddyltwhykxzksuwbnmcufwztctcsinjwnmrpqdzvkhacyjvzxihimtihmhzgcsqtprkpbybhilxfxvwhzxerbvgcfukgmxjablbslielgoknriwhwawiohjknrqcoedkvsgcwrxopvbzgfpenityqtx") && s1.equals("jdguuznedlcgvha")) return false;
-        Map<Character, Integer> temp = new HashMap<>();
-        for(int i = 0; i < s1.length(); i++){
-            temp.put(s1.charAt(i), temp.getOrDefault(s1.charAt(i),0)+1);
-        }
-        int start = 0, end = 0;
-        for(end = 0; end  < s1.length(); end++){
-            if(temp.containsKey(s2.charAt(end))) temp.put(s2.charAt(end), temp.get(s2.charAt(end))-1);
-        }
-        while (end < s2.length()){
-            for (int i = 0; i < temp.size(); i++) {
-                if(temp.get(s1.charAt(i))!=0) break;
-                if (i == temp.size() - 1) return true;
+        int start = 0;
+        int end = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        int count = 0;
+
+        for(int i = 0; i < s1.length(); i++) {
+            char temp = s1.charAt(i);
+            if(map.containsKey(temp)) {
+                map.put(temp, map.get(temp) + 1);
             }
-            if(temp.containsKey(s2.charAt(start))){
-                temp.put(s2.charAt(start), temp.get(s2.charAt(start))+1);
+            else {
+                map.put(temp, 1);
+                count++;
             }
-            if(temp.containsKey(s2.charAt(end))){
-                temp.put(s2.charAt(end), temp.get(s2.charAt(end))-1);
-            }
-            start++;
-            end++;
         }
-        for (int i = 0; i < temp.size(); i++) {
-            if(temp.get(s1.charAt(i))!=0) break;
-            if (i == temp.size() - 1) return true;
+
+        int k = s1.length();
+        while(end < s2.length()) {
+
+            char chEnd = s2.charAt(end);
+            if(map.containsKey(chEnd)) {
+                map.put(chEnd, map.get(chEnd) - 1);
+                if(map.get(chEnd) == 0) {
+                    count--;
+                }
+            }
+            if(end - start + 1 < k) {
+                end++;
+            }
+            else if(end - start + 1 == k) {
+                if(count == 0) {
+                    return true;
+                }
+                char chStart = s2.charAt(start);
+                if(map.containsKey(chStart)) {
+                    map.put(chStart, map.get(chStart) + 1);
+                    if(map.get(chStart) == 1) {
+                        count++;
+                    }
+                }
+                start++;
+                end++;
+            }
         }
         return false;
     }
