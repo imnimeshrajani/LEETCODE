@@ -1,28 +1,22 @@
 class Solution {
     public int minSwaps(int[] nums) {
-        int size = 0;
-        for(int i = 0; i < nums.length; i++){
-            if(nums[i] == 1) size++;
+        int k = 0;
+        for (int i : nums)
+            k += i;
+
+        int sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
         }
-        if(size == 0 || size == 1 || size == nums.length) return 0;
-        int swap = 0;
-        for(int i = 0; i < size; i++){
-            if(nums[i] == 0) swap++;
+
+        int res = sum;
+        int ans = Math.min(k - sum, k);
+
+        for (int i = 0; i < nums.length; i++) {
+            sum = sum - nums[i] + nums[(i + k) % nums.length];
+            ans = Math.min(k - sum, ans);
         }
-        if(swap == 0) return 0;
-        int start = 0, end = size;
-        int minSwap  = swap;
-        while(end < nums.length){
-            if(nums[start++] == 0) swap--;
-            if(nums[end++]  == 0) swap++;
-            minSwap = Math.min(minSwap, swap);
-        }
-        end = 0;
-        while(start < nums.length){
-            if(nums[start++] == 0) swap--;
-            if(nums[end++]  == 0) swap++;
-            minSwap = Math.min(minSwap, swap);
-        }
-        return minSwap;
+
+        return ans;
     }
 }
