@@ -1,24 +1,23 @@
 class Solution {
     public int secondsToRemoveOccurrences(String s) {
-        char[] arr = s.toCharArray();
-         int count_one = 0;
-        int wait_time = 0;
-        int answer = 0;
-        int pre_bit = 0;
-        for (int i = 0; i < arr.length; i++) {
-            int curr_bit = arr[i] - '0';
-            if (curr_bit == 1) {
-                int dist = i - count_one;
-                count_one++;
-                if (dist == 0) continue;
-                int step = dist + wait_time;
-                answer = Math.max(answer, step);
-                wait_time++;
-            } else {
-                if (wait_time > 0) wait_time--;
-            }
-            pre_bit = curr_bit;
+        char[] str = s.toCharArray();
+        int zeroCount = 0, waitTime = 0, idx = str.length - 1, i = 0;
+        while(idx >= 0 && str[idx] != '1') {
+            idx--;
         }
-        return answer;
+        while(i < idx && str[i] == '1') {
+            i++;
+        }
+        for(;i<idx;i++) {
+            if(str[i] == '0') {
+                zeroCount++;
+                if(str[i + 1] == '0' && waitTime > 0) {
+                    waitTime--;
+                }
+            } else if(str[i + 1] == '1') {
+                waitTime++;
+            }
+        }
+        return zeroCount + waitTime;
     }
 }
