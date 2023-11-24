@@ -1,10 +1,10 @@
 class Solution {
     public int[] executeInstructions(int n, int[] startPos, String s) {
-        int L = -1, R = 1, U = -1, D = 1, end = n - 1;
+        int end = n - 1;
         char[] arr = s.toCharArray();
         int[] ans = new int[s.length()];
         if(n == 1) return ans;
-        for(int i =0; i < arr.length; i++) {
+        for(int i = 0; i < arr.length; i++) {
             int j = i;
             int tempVertical = startPos[0], tempHorizontal = startPos[1];
             for(; j < arr.length; j++) {
