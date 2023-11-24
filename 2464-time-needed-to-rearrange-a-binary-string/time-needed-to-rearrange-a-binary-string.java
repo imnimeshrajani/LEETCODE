@@ -1,11 +1,12 @@
 class Solution {
     public int secondsToRemoveOccurrences(String s) {
+        char[] arr = s.toCharArray();
          int count_one = 0;
         int wait_time = 0;
         int answer = 0;
         int pre_bit = 0;
-        for (int i = 0; i < s.length(); i++) {
-            int curr_bit = s.charAt(i) - '0';
+        for (int i = 0; i < arr.length; i++) {
+            int curr_bit = arr[i] - '0';
             if (curr_bit == 1) {
                 int dist = i - count_one;
                 count_one++;
