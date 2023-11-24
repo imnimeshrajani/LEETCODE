@@ -2,6 +2,7 @@ class Solution {
     public int[] executeInstructions(int n, int[] startPos, String s) {
         int L = -1, R = 1, U = -1, D = 1, end = n - 1;
         int[] ans = new int[s.length()];
+        if(n == 1) return ans;
         for(int i =0; i < s.length(); i++) {
             int j = i;
             int[] tempStart = new int[2];
