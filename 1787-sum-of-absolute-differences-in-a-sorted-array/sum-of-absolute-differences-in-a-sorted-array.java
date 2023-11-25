@@ -11,7 +11,6 @@ class Solution {
             int currValue = nums[i] - nums[i-1];
             ans[i] = ((nums[nums.length-1] - (currValue*pos--)) + (currValue*count++)) - nums[i] - nums[i-1];
         }
-        System.out.println(Arrays.toString(ans));
         return ans;
     }
 }
