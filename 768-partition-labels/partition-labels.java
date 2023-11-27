@@ -1,4 +1,5 @@
 class Solution {
+    
     public List<Integer> partitionLabels(String s) {
         char[] arr = s.toCharArray();
         List<Integer> ans = new ArrayList<>();
