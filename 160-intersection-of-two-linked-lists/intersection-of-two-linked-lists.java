@@ -12,13 +12,14 @@
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         int sizeA = 0, sizeB = 0;
-        ListNode tempA = headA, tempB = headB;
-        while(tempA.next!=null){
-            tempA = tempA.next;
+        ListNode temp = headA;
+        while(temp.next!=null){
+            temp = temp.next;
             sizeA++;
         }
-        while(tempB.next!=null){
-            tempB = tempB.next;
+        temp = headB;
+        while(temp.next!=null){
+            temp = temp.next;
             sizeB++;
         }
         int diff = Math.abs(sizeA - sizeB);
