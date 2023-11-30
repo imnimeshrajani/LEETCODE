@@ -22,15 +22,13 @@ public class Solution {
             sizeB++;
         }
         int diff = Math.abs(sizeA - sizeB);
-        if(sizeA > sizeB){
-            while(diff--!=0) {
+        if(sizeA > sizeB)
+            while(diff--!=0) 
                 headA = headA.next;
-            }
-        } else {
-            while(diff--!=0) {
+        else 
+            while(diff--!=0) 
                 headB = headB.next;
-            }
-        }
+
         while(headA != headB){
             headA = headA.next;
             headB = headB.next;
