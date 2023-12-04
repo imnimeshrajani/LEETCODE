@@ -1,16 +1,15 @@
 class Solution {
     public String largestGoodInteger(String num) {
-        int result = -1;
-        char[] ch = num.toCharArray();
-        for (int i = 0; i < ch.length - 2; i++) {
-            if (ch[i] == ch[i + 1] && ch[i] == ch[i + 2]) {
-                result = Math.max(result, ch[i] - '0');
-            }
-        }
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < 3; i++) {
-            builder.append((char)(48 + result));
-        }
-        return result == -1 ? "" : builder.toString();
+        if (num.indexOf("999") != -1) return "999";
+        else if (num.indexOf("888") != -1) return "888";
+        else if (num.indexOf("777") != -1) return "777";
+        else if (num.indexOf("666") != -1) return "666";
+        else if (num.indexOf("555") != -1) return "555";
+        else if (num.indexOf("444") != -1) return "444";
+        else if (num.indexOf("333") != -1) return "333";
+        else if (num.indexOf("222") != -1) return "222";
+        else if (num.indexOf("111") != -1) return "111";
+        else if (num.indexOf("000") != -1) return "000";
+        return "";
     }
 }
