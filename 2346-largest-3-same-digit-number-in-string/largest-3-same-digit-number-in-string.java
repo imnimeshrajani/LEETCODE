@@ -2,7 +2,7 @@ class Solution {
     public String largestGoodInteger(String num) {
         int result = -1;
         char[] ch = num.toCharArray();
-        for (int i = 0; i + 2 < ch.length; i++) {
+        for (int i = 0; i < ch.length - 2; i++) {
             if (ch[i] == ch[i + 1] && ch[i] == ch[i + 2]) {
                 result = Math.max(result, ch[i] - '0');
             }
