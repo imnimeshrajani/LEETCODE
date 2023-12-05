@@ -1,21 +1,19 @@
 class Solution {
     public String stoneGameIII(int[] stoneValue) {
         int n = stoneValue.length;
-        Integer[] memo = new Integer[n];
-        int dif = f(stoneValue, n, 0, memo);
-        if (dif > 0) return "Alice";
-        else if (dif < 0) return "Bob";
+        int dp[] = {0,0,0};
+        int total = 0;
+
+        for(int i=n-1;i>=0;i--){
+            total += stoneValue[i];
+            int curr = Math.max(total-dp[0],Math.max(total-dp[1],total-dp[2]));
+            dp[2] = dp[1];
+            dp[1] = dp[0];
+            dp[0] = curr;
+        }
+
+        if(dp[0]>total-dp[0]) return "Alice";
+        else if(dp[0]<total-dp[0]) return "Bob";
         return "Tie";
-    }
-    private int f(int[] stoneValue, int n, int i, Integer[] memo) {
-        if (i == n) return 0;
-        if (memo[i] != null) return memo[i];
-        int result = stoneValue[i] - f(stoneValue, n, i + 1, memo);
-        if (i + 2 <= n) 
-            result = Math.max(result, stoneValue[i] + stoneValue[i + 1] - f(stoneValue, n, i + 2, memo));
-        if (i + 3 <= n)
-            result = Math.max(result, stoneValue[i] + stoneValue[i + 1] + stoneValue[i + 2] - f(stoneValue, n, i + 3, memo));
-        memo[i] = result;
-        return result;
     }
 }
