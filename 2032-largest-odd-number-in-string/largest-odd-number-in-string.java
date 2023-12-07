@@ -1,12 +1,16 @@
 class Solution {
     public String largestOddNumber(String num) {
-        char[] ch =num.toCharArray();
-        if(ch[ch.length-1] - '0' % 2 == 1) return num;
-        int i = ch.length - 1;
-        while(i>=0){
-            if(ch[i] % 2 == 1) return num.substring(0,i+1);
-            i--;
-        }
-        return "";
+        int number = 0;
+		final int size = num.length();
+		for(int i = size - 1; i >= 0; i--)
+		{
+			number = (int)num.codePointAt(i) - 48;
+			if ((number ^ 1) == (number + 1))
+				continue;
+
+			return num.substring(0, i + 1);
+		}
+		
+		return "";
     }
 }
