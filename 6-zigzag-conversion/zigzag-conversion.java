@@ -8,8 +8,7 @@ class Solution {
             boolean up = true;
             while (index < ch.length){
                 ans.append(ch[index]);
-                if (i==1) index += 2*(n-i);
-                else if (i==n) index += 2*(i-1);
+                if (i==1 || i==n) index += 2*(n-1);
                 else {
                     index += up ? 2*(n-i) : 2*(i-1);
                     up=!up;
