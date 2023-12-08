@@ -26,7 +26,8 @@ class Solution {
         for (int count = 0; count <= (n + m) / 2; count++) {
             m2 = m1;
             if (i != n && j != m) {
-                m1 = (nums1[i] > nums2[j]) ? nums2[j++] : nums1[i++];
+                if (nums1[i] > nums2[j]) m1 = nums2[j++];
+                else m1 = nums1[i++];
             } else if (i < n) m1 = nums1[i++];
             else m1 = nums2[j++];
         }
