@@ -1,16 +1,45 @@
 class Solution {
     public int[][] allCellsDistOrder(int rows, int cols, int rCenter, int cCenter) {
-        int[][] ans = new int[rows * cols][2];
-        int k = 0;
-        for(int i = 0; i < rows; i++) {
-            for(int j = 0; j < cols; j++) {
-                ans[k][0] = i;
-                ans[k++][1] = j;
-            }   
+        int[][] result = new int[rows * cols][];
+        result[0] = new int[]{rCenter, cCenter};
+        int index = 1;
+        int lim = Math.max(rCenter, rows - rCenter - 1) + Math.max(cCenter, cols - cCenter - 1);
+        for (int dist = 1; dist <= lim; dist++) {
+            int r = rCenter - dist;
+            int c = cCenter;
+
+            for (int count = dist; count > 0; count--) {
+                if (r >= 0 && c >= 0) {
+                    result[index++] = new int[]{r, c};
+                }
+                r++;
+                c--;
+            }
+
+            for (int count = dist; count > 0; count--) {
+                if (r < rows && c >= 0) {
+                    result[index++] = new int[]{r, c};
+                }
+                r++;
+                c++;
+            }
+
+            for (int count = dist; count > 0; count--) {
+                if (r < rows && c < cols) {
+                    result[index++] = new int[]{r, c};
+                }
+                r--;
+                c++;
+            }
+
+            for (int count = dist; count > 0; count--) {
+                if (r >= 0 && c < cols) {
+                    result[index++] = new int[]{r, c};
+                }
+                r--;
+                c--;
+            }
         }
-        Arrays.sort(ans,(o1,o2)->
-           Math.abs(o1[0]-rCenter)+Math.abs(o1[1]-cCenter) - (Math.abs(o2[0]-rCenter) + Math.abs(o2[1]-cCenter))
-        );
-        return ans;
+        return result;
     }
 }
