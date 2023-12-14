@@ -1,23 +1,29 @@
 class Solution {
-    
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        Arrays.sort(nums);
-        List<List<Integer>> mainAns = new ArrayList();
-        List<Integer> ans = new ArrayList();
-        mainAns.add(new ArrayList<>());
-        subSets(nums, 0, ans, mainAns);
-        return mainAns;
+        int[] count = new int[21];
+        int[] max = new int[21];
+        for (int num : nums) {
+            max[10 + num] += 1;
+        }
+
+        ArrayList<List<Integer>> result = new ArrayList<>();
+        dfs(max, count, 0, result);
+
+        return result;
     }
 
-    public void subSets(int[] nums, int index, List<Integer> list, List<List<Integer>> ans) {
-        if(index == nums.length) {
-            
-            if(!ans.contains(list))ans.add(new ArrayList(list));
-            return; 
+    private void dfs(int[] max, int[] count, int depth, ArrayList<List<Integer>> result) {
+        if (depth >= max.length) {
+            ArrayList<Integer> temp = new ArrayList<>();
+            for (int i = 0; i < max.length; i++)
+                for (int j = 0; j < count[i]; j++) temp.add(i - 10);
+            result.add(temp);
+            return;
         }
-        subSets(nums,index+1, list, ans);
-        list.add(nums[index]);
-        subSets(nums,index+1, list, ans);
-        list.remove(list.size()-1);
+
+        for (int i = 0; i <= max[depth]; i++) {
+            count[depth] = i;
+            dfs(max, count, depth + 1, result);
+        }
     }
 }
