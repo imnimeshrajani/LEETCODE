@@ -3,9 +3,9 @@ class Solution {
         int sum = 0;
         for(int i = 0; i < k; i++) sum += cardPoints[i];
         int max = sum;
-        for(int i = cardPoints.length - 1; i >= 0 && k-1>=0; i--) {
+        for(int i = cardPoints.length - 1; i >= 0 && k-1>=0; i--, k--) {
             sum += cardPoints[i];
-            sum -= cardPoints[--k];
+            sum -= cardPoints[k-1];
             max = Math.max(max, sum);
         }
         return max;
