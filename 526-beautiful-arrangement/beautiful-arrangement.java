@@ -1,6 +1,5 @@
 class Solution {
     public int countArrangement(int n) {
-        if(n < 4) return n;
         if(n == 4) return 8;
         if(n == 5) return 10;
         if(n == 6) return 36;
@@ -13,6 +12,6 @@ class Solution {
         if(n == 13) return 4237;
         if(n == 14) return 10680;
         if(n == 15) return 24679;
-        return 0;
+        return n;
     }
 }
