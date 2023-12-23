@@ -10,9 +10,12 @@ class Solution {
             if(ch[i] == 'S') x--;
             if(ch[i] == 'E') y++;
             if(ch[i] == 'W') y--;
-            String cod =  x + "," + y;
-            if(set.contains(cod)) return true;
-            else set.add(cod);
+            StringBuilder str = new StringBuilder();
+            str.append(x);
+            str.append(',');
+            str.append(y);
+            if(set.contains(str.toString())) return true;
+            else set.add(str.toString());
         }
         return false;
     }
