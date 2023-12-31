@@ -1,18 +1,16 @@
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
-        int n = triangle.size();
-        int[][] dp = new int[n][n];
-        for(int i=0; i<n; i++){
-            Arrays.fill(dp[i], -1);
+        if(triangle.size() == 0) return 0;
+        int m = triangle.size()-1, n = triangle.get(m).size();
+        int[] ans = new int[n];
+        for(int i = 0; i < n; i++) ans[i] = triangle.get(m).get(i);
+    
+        for(int i = n - 2; i >= 0; i--){
+            List<Integer> cur = triangle.get(i);
+            for(int j = 0; j < cur.size(); j++){
+                ans[j] = Math.min(ans[j], ans[j + 1]) + cur.get(j);
+            }
         }
-        return minPathSum(0, 0, n, triangle, dp);
-    }
-    public static int minPathSum(int i, int j, int n, List<List<Integer>> triangle, int[][] dp){
-        if(j == n) return 0;
-        if(dp[i][j] != -1) return dp[i][j];
-        List<Integer> list = triangle.get(j);
-        int val = list.get(i);
-        dp[i][j] = val+Math.min(minPathSum(i, j+1, n, triangle, dp), minPathSum(i+1, j+1, n, triangle, dp));
-        return dp[i][j];
+        return ans[0];
     }
 }
