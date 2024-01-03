@@ -3,7 +3,7 @@ class Solution {
         int ans = 0, count = 0, prev = 0;
         for(int i = 0; i < bank.length; i++){
             count = counting(bank[i].toCharArray(), count);
-            if(count!=0) {
+            if(count != 0) {
                 if(prev != 0) ans += prev * count;
                 prev = count;
             }
