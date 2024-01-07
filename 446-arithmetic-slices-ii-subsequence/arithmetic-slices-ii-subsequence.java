@@ -5,7 +5,7 @@ class Solution {
         HashMap<Long, ArrayList<Integer>> map = new HashMap<>();
         for(int i = 0; i < n; i++){
             long temp = nums[i];
-            if(!map.containsKey(temp)) map.put(temp, new ArrayList<Integer>());
+            map.put(temp, map.getOrDefault(temp, new ArrayList<Integer>()));
             map.get(temp).add(i);
         }
         int sum = 0;
