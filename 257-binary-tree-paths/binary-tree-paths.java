@@ -13,15 +13,25 @@
  *     }
  * }
  */
-    class Solution {
-        public List<String> binaryTreePaths(TreeNode root) {
-        List<String> answer = new ArrayList<String>();
-        if (root != null) searchBT(root, "", answer);
-        return answer;
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        var result = new ArrayList<String>();
+        var sb = new StringBuilder();
+        helper(root, sb, result);
+        return result;
+        
     }
-    private void searchBT(TreeNode root, String path, List<String> answer) {
-        if (root.left == null && root.right == null) answer.add(path + root.val);
-        if (root.left != null) searchBT(root.left, path + root.val + "->", answer);
-        if (root.right != null) searchBT(root.right, path + root.val + "->", answer);
+
+    private void helper(TreeNode root, StringBuilder sb, List<String> paths){
+        if(root == null) return;
+        int len = sb.length();
+        sb.append(root.val);
+        if(root.left == null && root.right == null) paths.add(sb.toString());
+        else{
+            sb.append("->");
+            helper(root.left, sb, paths);
+            helper(root.right, sb, paths);
+        }
+        sb.setLength(len);
     }
 }
