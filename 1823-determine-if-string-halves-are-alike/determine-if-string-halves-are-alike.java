@@ -1,9 +1,7 @@
 class Solution {
     public boolean halvesAreAlike(String s) {
         int mid = s.length() / 2;
-        String firstHalf = s.substring(0, mid);
-        String secondHalf = s.substring(mid);
-        return countVowels(firstHalf) == countVowels(secondHalf);
+        return countVowels(s.substring(0, mid)) == countVowels(s.substring(mid));
     }
     
     private int countVowels(String str) {
