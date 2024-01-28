@@ -1,23 +1,31 @@
 class Solution {
-    public int numSubmatrixSumTarget(int[][] matrix, int target) {
-        int n = matrix.length, m = matrix[0].length + 1, ans = 0;
-        int[][] temp = new int[n][m];
-        for(int i = 0; i < n; i++) 
-            for(int j = 1; j < m; j++) 
-                temp[i][j] = temp [i][j-1] + matrix[i][j-1];
-
-        for(int i = 0; i < m; i++) {
-            for(int j = i+1; j < m; j++) {
-                int sum = 0;
-                Map<Integer, Integer> map = new HashMap<>();
-                map.put(0,1);
-                for(int k = 0; k < n; k++) {
-                    sum += temp[k][j] - temp[k][i];
-                    if(map.containsKey(sum - target)) ans += map.get(sum - target);
-                    map.put(sum, map.getOrDefault(sum, 0)+1);
+    public int numSubmatrixSumTarget(int[][] nums, int t) {
+        int row=nums.length;
+        int col=nums[0].length;
+        int count=0;
+        for(int i=0;i<row;i++)//1
+        {
+            int arr[]=new int[col];
+            for(int j=i;j<row;j++)//2
+            {
+                for(int k=0;k<col;k++)//3
+                {
+                    arr[k]+=nums[j][k];
+                }
+                for(int l=0;l<col;l++)//4
+                {
+                    int sum=0;
+                    for(int r=l;r<col;r++)//5
+                    {
+                        sum+=arr[r];
+                        if(sum==t)
+                        {
+                            count++;
+                        }
+                    }
                 }
             }
         }
-        return ans;
+        return count;
     }
 }
