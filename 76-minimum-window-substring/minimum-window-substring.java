@@ -21,6 +21,6 @@ class Solution {
             }
         }
 
-        return (minLen == Integer.MAX_VALUE) ? "" : new String(ch, startIndex, minLen);
+        return (minLen == Integer.MAX_VALUE) ? "" : s.substring(startIndex, startIndex+minLen);
     }
 }
