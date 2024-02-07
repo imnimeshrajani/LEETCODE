@@ -1,21 +1,20 @@
 class Solution {
     public String frequencySort(String s) {
-        int[][] freq = new int[128][2];
-
-        for (int i = 0; i < 128; i++)
-            freq[i][0] = i;
-
-        for (var c : s.toCharArray())
-            freq[c][1]++;
-
-        Arrays.sort(freq, (a, b) -> Integer.compare(b[1], a[1]));
-
-        StringBuilder ans = new StringBuilder();
-
-        for (int i = 0; i < 128; i++)
-            while (freq[i][1]-- > 0)
-                ans.append((char) freq[i][0]);
-
-        return ans.toString();
+        char[] ch = s.toCharArray();
+        int[] freq = new int[128];
+        for (int i : ch)
+            freq[i]++;
+        for (int i = 0; i < ch.length;) {
+            char cmax = ',';
+            for (int j = 0; j < 128; j++) {
+                if (freq[j] > freq[cmax])
+                    cmax = (char) j;
+            }
+            while (freq[cmax] != 0) {
+                ch[i++] = cmax;
+                freq[cmax]--;
+            }
+        }
+        return new String(ch);
     }
 }
