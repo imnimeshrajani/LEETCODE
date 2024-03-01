@@ -5,7 +5,6 @@ class Solution {
             if (ch == '1')
                 count++;
         StringBuilder ans = new StringBuilder();
-        if (count > 1)
             for (int i = 1; i < count; i++)
                 ans.append('1');
         for (int i = 0; i < s.length() - count; i++)
