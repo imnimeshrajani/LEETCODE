@@ -5,13 +5,8 @@ class Solution {
         int index = nums.length - 1;
         int result[] = new int[nums.length];
         while (left <= right) {
-            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
-                result[index] = nums[left] * nums[left];
-                left++;
-            } else {
-                result[index] = nums[right] * nums[right];
-                right--;
-            }
+            result[index] = (Math.abs(nums[left]) > Math.abs(nums[right])) ? nums[left] * nums[left++] : nums[right] * nums[right--];
+            
             index--;
         }
         return result;
