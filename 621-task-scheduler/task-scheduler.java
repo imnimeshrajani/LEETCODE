@@ -7,6 +7,6 @@ class Solution {
             max = Math.max(freq[i - 'A'],max);
         }
         for (int i : freq) if (i == max) extra++;
-        return Math.max(tasks.length, (--max * n) + extra);
+        return Math.max(tasks.length, --max * n + extra);
     }
 }
