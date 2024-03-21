@@ -11,9 +11,20 @@
 class Solution {
     int startPoint = 0;
     public ListNode reverseList(ListNode head) {
-        if(head == null) return head;
-        helper(head, head, 0);
-        return head;
+        // Recursion
+        // if(head == null) return head;
+        // helper(head, head, 0);
+        // return head;
+
+        // Loop
+        ListNode prev = null, next;
+        while (head != null) {
+            next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
     }
     ListNode helper(ListNode node, ListNode start, int endPoint) {
         if(node == null) return start;
