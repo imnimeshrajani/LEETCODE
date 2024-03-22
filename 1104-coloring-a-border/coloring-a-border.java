@@ -15,21 +15,19 @@ class Solution {
         int count = 0;
         for (int k = 0; k < 4; k++) {
             int x = i + dx[k], y = j + dy[k];
-             if (x < 0 || x >= grid.length || y < 0 || y >= grid[i].length || req != grid[x][y]) {
+            if (x < 0 || x >= grid.length || y < 0 || y >= grid[i].length || req != grid[x][y]) 
                 continue;
-            }
             count++;
         }
         for (int k = 0; k < 4; k++) {
             int x = i + dx[k], y = j + dy[k];
-            if (x < 0 || x >= grid.length || y < 0 || y >= grid[i].length || req != grid[x][y]) {
+            if (x < 0 || x >= grid.length || y < 0 || y >= grid[i].length || req != grid[x][y]) 
                 continue;
-            }
-            if(visited[x][y] == false){
-                    helper(grid, x, y, target, visited);
-            }
+    
+            if (visited[x][y] == false) 
+                helper(grid, x, y, target, visited);
         }
-        if (count < 4){
+        if (count < 4) {
             grid[i][j] = target;
         }
     }
