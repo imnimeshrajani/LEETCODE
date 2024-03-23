@@ -9,11 +9,10 @@ class Solution {
             helper(grid, i, 0);
         }
         int ans = 0;
-        for (int[] i : grid) {
-            for (int j : i) {
+        for (int[] i : grid) 
+            for (int j : i) 
                 ans += j;
-            }
-        }
+                
         return ans;
     }
 
@@ -25,6 +24,5 @@ class Solution {
         helper(grid, i, j + 1);
         helper(grid, i - 1, j);
         helper(grid, i, j - 1);
-
     }
 }
