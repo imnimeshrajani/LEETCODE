@@ -4,8 +4,7 @@ class Solution {
         Map<Integer, List<Integer>> map = new HashMap<>();
         createMap(map, routes);
         if(!map.containsKey(source) || !map.containsKey(target)) return -1;
-        Set<Integer> busStop = new HashSet<>();
-        Set<Integer> bus = new HashSet<>();
+        Set<Integer> bus = new HashSet<>(), busStop = new HashSet<>();
         LinkedList<Integer> que = new LinkedList<>();
         int cost = 0;
         que.addLast(source);
@@ -18,11 +17,10 @@ class Solution {
                 List<Integer> buses = map.get(q);
                 for(int i : buses) {
                     if(bus.contains(i)) continue;
-                    int[] arr = routes[i];
-                    for(int stop : arr) {
-                        if(busStop.contains(stop)) continue;
-                        que.addLast(stop);
-                        busStop.add(stop);
+                    for(int route : routes[i]) {
+                        if(busStop.contains(route)) continue;
+                        que.addLast(route);
+                        busStop.add(route);
                     }
                     bus.add(i);
                 }
