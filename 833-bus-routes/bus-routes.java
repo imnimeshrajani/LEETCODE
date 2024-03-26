@@ -5,21 +5,21 @@ class Solution {
         createMap(map, routes);
         if(!map.containsKey(source) || !map.containsKey(target)) return -1;
         Set<Integer> bus = new HashSet<>(), busStop = new HashSet<>();
-        Queue<Integer> que = new ArrayDeque<>();
+        LinkedList<Integer> que = new LinkedList<>();
         int cost = 0;
-        que.add(source);
+        que.addLast(source);
         busStop.add(source);
         while(que.size() > 0) {
             int size = que.size();
             while (size-- > 0) {
-                int q = que.remove();
+                int q = que.removeFirst();
                 if(q == target) return cost;
                 List<Integer> buses = map.get(q);
                 for(int i : buses) {
                     if(bus.contains(i)) continue;
                     for(int route : routes[i]) {
                         if(busStop.contains(route)) continue;
-                        que.add(route);
+                        que.addLast(route);
                         busStop.add(route);
                     }
                     bus.add(i);
