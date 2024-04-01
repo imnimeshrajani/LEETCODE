@@ -10,32 +10,35 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        if (lists == null || lists.length == 0)
+         if (lists == null || lists.length == 0) {
             return null;
-        ListNode dummy = new ListNode(-1);
-        ListNode prev = dummy;
-
-        while (true) {
-            ListNode minNode = null;
-            int minIdx = -1;
-
-            for (int i = 0; i < lists.length; ++i) {
-                ListNode currList = lists[i];
-                if (currList == null)
-                    continue;
-                if (minNode == null || currList.val < minNode.val) {
-                    minNode = currList;
-                    minIdx = i;
-                }
-            }
-            if (minNode == null)
-                break;
-
-            prev.next = minNode;
-            prev = prev.next;
-
-            lists[minIdx] = minNode.next;
         }
-        return dummy.next;
+        return mergesort(lists,0,lists.length-1);
+    }
+    public ListNode mergesort(ListNode[] ls,int low,int high){
+        if(low==high)return ls[low];
+        if(low+1==high)return merge(ls[low],ls[high]);
+        int mid=(low+high)/2;
+        ListNode left=mergesort(ls,low,mid);
+        ListNode right=mergesort(ls,mid+1,high);
+        return merge(left,right);
+    }
+    public ListNode merge(ListNode l,ListNode r){
+        ListNode dum=new ListNode(-1);
+        ListNode head=dum;
+        while(l!=null && r!=null){
+            if(l.val<r.val){
+                dum.next=l;
+                l=l.next;
+                dum=dum.next;
+            }
+            else{
+                dum.next=r;
+                r=r.next;
+                dum=dum.next;
+            }
+        }
+        dum.next=(l!=null) ? l : r;
+        return head.next;
     }
 }
