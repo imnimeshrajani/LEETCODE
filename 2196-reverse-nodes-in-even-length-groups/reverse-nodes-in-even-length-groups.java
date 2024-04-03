@@ -1,24 +1,24 @@
 class Solution {
     public ListNode reverseEvenLengthGroups(ListNode head) {
-        int groupNo = 2, nodeCount = 0 ;
-        ListNode runner = head.next, start = head ;
+        int count = 2, position = 0;
+        ListNode runner = head.next, start = head;
         
         while (runner != null) {
-            if (++nodeCount == groupNo) {
-                if (groupNo % 2 == 0) {
-                    runner = start.next ;
-                    start.next = reverse(start.next, nodeCount) ;
+            if (++position == count) {
+                if (count % 2 == 0) {
+                    runner = start.next;
+                    start.next = reverse(start.next, position);
                 }
                 
-                nodeCount = 0 ;
-                groupNo++ ;
-                start = runner ;
+                position = 0;
+                count++ ;
+                start = runner;
             }
             runner = runner.next ;
         }
         
-        if (nodeCount % 2 == 0 && start.next != null)
-            start.next = reverse(start.next, nodeCount) ;
+        if (position % 2 == 0 && start.next != null)
+            start.next = reverse(start.next, position) ;
         
         return head ;
     }
