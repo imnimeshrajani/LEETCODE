@@ -1,25 +1,22 @@
 class Solution {
     public int constrainedSubsetSum(int[] nums, int k) {
-        Deque<int[]> q = new LinkedList<>();
-        int res = Integer.MIN_VALUE;
+        int[] dq = new int[nums.length];
+        int l = 0, r = 1;
+        dq[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            nums[i] = Math.max(dq[l] + nums[i], nums[i]);
+            while (r > l && dq[r - 1] < nums[i])
+                r--;
 
-        for (int i = 0; i < nums.length; i++) {
-            int total = nums[i] + ((!q.isEmpty()) ? q.getFirst()[1] : 0);
-            res = Math.max(res, total);
-
-            while (!q.isEmpty() && total >= q.getLast()[1]) {
-                q.removeLast();
-            }
-
-            if (total > 0) {
-                q.addLast(new int[]{i, total});
-            }
-
-            if (!q.isEmpty() && q.getFirst()[0] == i - k) {
-                q.removeFirst();
-            }
+            dq[r] = nums[i];
+            r++;
+            if (i >= k && dq[l] == nums[i - k])
+                l++;
         }
+        int ans = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++)
+            ans = Math.max(ans, nums[i]);
 
-        return res; 
+        return ans;
     }
 }
