@@ -9,12 +9,12 @@ class Solution {
                 else 
                     h[j] = 0;
             }
-            ans = Math.max(ans, nextSmallerElements(h, prevSmallerElements(h)));
+            ans = Math.max(ans, prevSmallerElements(h));
         }
         return ans;
     }
-    
-    int[] prevSmallerElements(int[] h) {
+
+    int prevSmallerElements(int[] h) {
         int[] arr = new int[h.length];
         arr[0] = -1;
         for(int i = 1; i < h.length; i++) {
@@ -24,7 +24,7 @@ class Solution {
             
             arr[i] = idx;
         }
-        return arr;
+        return nextSmallerElements(h, arr);
     }
     int nextSmallerElements(int[] h, int[] ps) {
         int ans = 0, n = h.length;
