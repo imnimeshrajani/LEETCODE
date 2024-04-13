@@ -1,12 +1,7 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
-        int ans = 0;
-        int[] ps = prevSmallerElements(heights), ns = nextSmallerElements(heights);
-        for (int i = 0; i < heights.length; i++) {
-            // System.out.println("ps: " + ps[i] + " ns: " + ns[i]);
-            ans = Math.max(ans,(ns[i] - ps[i] - 1) * heights[i]);
-        }
-        return ans;
+        
+        return nextSmallerElements(heights, prevSmallerElements(heights));
     }
     int[] prevSmallerElements(int[] h) {
         int[] arr = new int[h.length];
@@ -20,16 +15,21 @@ class Solution {
         }
         return arr;
     }
-    int[] nextSmallerElements(int[] h) {
-        int[] arr = new int[h.length];
-        arr[arr.length-1] = h.length;
-        for(int i = h.length - 2; i >= 0; i--) {
+    int nextSmallerElements(int[] h, int[] ps) {
+        int ans = 0, n = h.length;
+        int[] arr = new int[n];
+        
+        arr[n - 1] = n;
+        ans = Math.max(ans,(arr[n - 1] - ps[n - 1] - 1) * h[n-1]);
+        for(int i = n - 2; i >= 0; i--) {
             int idx = i + 1;
-            while(idx < h.length && h[idx] >= h[i]) {
+            while(idx < n && h[idx] >= h[i]) {
                 idx = arr[idx];
             }
             arr[i] = idx;
+            ans = Math.max(ans,(arr[i] - ps[i] - 1) * h[i]);
         }
-        return arr;
+
+        return ans;
     }
 }
