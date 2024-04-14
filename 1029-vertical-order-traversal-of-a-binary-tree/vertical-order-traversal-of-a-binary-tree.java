@@ -1,64 +1,65 @@
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
  * }
  */
-
- // Create class tuple to store the node and coordinates.
- class Tuple{
-    TreeNode node;
-    int row;
-    int col;
-    // Constructor for tuple.
-    public Tuple(TreeNode _node, int _row, int _col){
-        node = _node;
-        row = _row;
-        col = _col;
-    }
- }
 class Solution {
 
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-
-        
-        TreeMap<Integer,TreeMap<Integer,PriorityQueue<Integer>>> map = new TreeMap<>();
-
-        Queue<Tuple> q = new LinkedList<Tuple>();
-        q.add(new Tuple(root,0,0));
-        while(!q.isEmpty()){
-            Tuple tuple = q.poll();
-            TreeNode node = tuple.node;
-            int x = tuple.row;
-            int y = tuple.col;
-
-            if(!map.containsKey(x)) map.put(x,new TreeMap<>());
-
-            if(!map.get(x).containsKey(y)) map.get(x).put(y,new PriorityQueue<>());
-
-            map.get(x).get(y).add(node.val);
-            if(node.left!=null) q.add(new Tuple(node.left,x-1,y+1));
-            if(node.right!=null) q.add(new Tuple(node.right, x+1,y+1));
-        }
-
-        List<List<Integer>> list = new ArrayList<>();
-
-        for(TreeMap<Integer,PriorityQueue<Integer>> yn : map.values()){
-            list.add(new ArrayList<>());
-            for(PriorityQueue<Integer> nodes : yn.values()){
-                while(!nodes.isEmpty()){
-                    list.get(list.size()-1).add(nodes.poll());
+        int min = 0, max = 0;
+        Map<Integer, List<Integer>> map = new HashMap();
+        List<List<Integer>> res = new ArrayList();
+        if (root == null)
+            return res;
+        Queue<TreeNode> qt = new LinkedList();
+        Queue<Integer> qi = new LinkedList();
+        qt.add(root);
+        qi.add(0);
+        while (!qt.isEmpty()) {
+            int size = qt.size();
+            Map<Integer, List<Integer>> tmp = new HashMap();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = qt.poll();
+                int idx = qi.poll();
+                if (!tmp.containsKey(idx))
+                    tmp.put(idx, new ArrayList<Integer>());
+                tmp.get(idx).add(cur.val);
+                if (idx < min)
+                    min = idx;
+                if (idx > max)
+                    max = idx;
+                if (cur.left != null) {
+                    qt.add(cur.left);
+                    qi.add(idx - 1);
+                }
+                if (cur.right != null) {
+                    qt.add(cur.right);
+                    qi.add(idx + 1);
                 }
             }
-        }return list;
+            for (int key : tmp.keySet()) {
+                if (!map.containsKey(key))
+                    map.put(key, new ArrayList<Integer>());
+                List<Integer> list = tmp.get(key);
+                Collections.sort(list);
+                map.get(key).addAll(list);
+            }
+
+        }
+        for (int i = min; i <= max; i++) {
+            List<Integer> list = map.get(i);
+            res.add(list);
+        }
+        return res;
     }
 }
