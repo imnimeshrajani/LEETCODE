@@ -16,50 +16,47 @@
 class Solution {
 
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-        int min = 0, max = 0;
+        int start = 0, end = 0;
         Map<Integer, List<Integer>> map = new HashMap();
         List<List<Integer>> res = new ArrayList();
         if (root == null)
             return res;
-        Queue<TreeNode> qt = new LinkedList();
-        Queue<Integer> qi = new LinkedList();
-        qt.add(root);
-        qi.add(0);
-        while (!qt.isEmpty()) {
-            int size = qt.size();
+        Queue<TreeNode> qTree = new LinkedList();
+        Queue<Integer> qInt = new LinkedList();
+        qTree.add(root);
+        qInt.add(0);
+        while (!qTree.isEmpty()) {
+            int size = qTree.size();
             Map<Integer, List<Integer>> tmp = new HashMap();
             for (int i = 0; i < size; i++) {
-                TreeNode cur = qt.poll();
-                int idx = qi.poll();
-                if (!tmp.containsKey(idx))
-                    tmp.put(idx, new ArrayList<Integer>());
+                TreeNode cur = qTree.poll();
+                int idx = qInt.poll();
+                tmp.putIfAbsent(idx, new ArrayList<Integer>());
                 tmp.get(idx).add(cur.val);
-                if (idx < min)
-                    min = idx;
-                if (idx > max)
-                    max = idx;
+                if (idx < start)
+                    start = idx;
+                if (idx > end)
+                    end = idx;
                 if (cur.left != null) {
-                    qt.add(cur.left);
-                    qi.add(idx - 1);
+                    qTree.add(cur.left);
+                    qInt.add(idx - 1);
                 }
                 if (cur.right != null) {
-                    qt.add(cur.right);
-                    qi.add(idx + 1);
+                    qTree.add(cur.right);
+                    qInt.add(idx + 1);
                 }
             }
             for (int key : tmp.keySet()) {
-                if (!map.containsKey(key))
-                    map.put(key, new ArrayList<Integer>());
+                map.putIfAbsent(key, new ArrayList<Integer>());
                 List<Integer> list = tmp.get(key);
                 Collections.sort(list);
                 map.get(key).addAll(list);
             }
 
         }
-        for (int i = min; i <= max; i++) {
-            List<Integer> list = map.get(i);
-            res.add(list);
-        }
+        for (int i = start; i <= end; i++) 
+            res.add(map.get(i));
+
         return res;
     }
 }
