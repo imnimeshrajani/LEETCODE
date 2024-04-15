@@ -16,7 +16,28 @@
 class Solution {
     List<List<Integer>> ans = new ArrayList<>();
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        traversal(root, 0);
+        // traversal(root, 0);
+        if(root  == null) return ans;
+        Stack<TreeNode> evenStack = new Stack(), oddStack = new Stack();
+        evenStack.push(root);
+        while(!evenStack.isEmpty() || !oddStack.isEmpty()) {
+            List<Integer>  subList = new ArrayList<>();
+            while(!evenStack.isEmpty()) {
+                TreeNode temp = evenStack.pop();
+                subList.add(temp.val);
+                if(temp.left != null) oddStack.push(temp.left);
+                if(temp.right != null) oddStack.push(temp.right);
+            }
+            ans.add(subList);
+            subList = new ArrayList<>();
+            while(!oddStack.isEmpty()) {
+                TreeNode temp = oddStack.pop();
+                subList.add(temp.val);
+                if(temp.right != null) evenStack.push(temp.right);
+                if(temp.left != null) evenStack.push(temp.left);
+            }
+            if(!subList.isEmpty()) ans.add(subList);
+        }
         return ans;
     }
     void traversal(TreeNode root, int level) {
