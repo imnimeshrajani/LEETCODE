@@ -16,9 +16,33 @@
 class Solution {
     int ans = 0;
     public int sumNumbers(TreeNode root) {
-        numCreator(root, 0);
+        // Recursion Approach
+        // numCreator(root, 0);
+        
+        Stack<TreeNode> nodeStack = new Stack();
+        TreeNode curr = root, prev = null;
+        int num = 0;
+        while(curr != null || !nodeStack.isEmpty()) {
+            while(curr != null) {
+                num = (num * 10) + curr.val;
+                nodeStack.push(curr);
+                curr = curr.left;
+            }
+            curr = nodeStack.peek();
+            if(curr.right != null && curr.right != prev) {
+                curr = curr.right;
+                continue;
+            }
+            if(curr.left == null && curr.right == null) 
+                ans += num;
+            
+            prev = nodeStack.pop();
+            num /= 10;
+            curr = null;
+        }
         return ans;
     }
+
     void numCreator(TreeNode root, int num) {
         if(root.left == null && root.right == null) {
             ans += num + root.val;
