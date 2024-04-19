@@ -1,15 +1,18 @@
 class Solution {
     int ans = 0;
     public int numIslands(char[][] grid) {
-        for(int i = 0; i < grid.length; i++) {
-            for(int j = 0; j < grid[i].length; j++) {
-                if(grid[i][j] == '1') {
-                    findArea(grid, i, j);
-                    ans++;
-                }
+        for(int i = 0; i < grid.length; i++) 
+            check(grid, i);
+            
+        return ans;
+    }
+    void check(char[][] grid, int i) {
+        for(int j = 0; j < grid[i].length; j++) {
+            if(grid[i][j] == '1') {
+                findArea(grid, i, j);
+                ans++;
             }
         }
-        return ans;
     }
     void findArea(char[][] grid, int i, int j) {
         if(grid[i][j] == '0') return;
