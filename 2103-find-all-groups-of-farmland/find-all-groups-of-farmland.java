@@ -23,11 +23,11 @@ class Solution {
     int helper(int[][] land, int i, int j) {
         if(land[i][j] == 0) return 0;
         land[i][j] = 0;
-        int left = 0, right = 0, top = 0, bottom = 0;
+        int right = 0, bottom = 0;
         if(i < land.length - 1) bottom = helper(land, i + 1, j);
         if(j < land[i].length - 1) right = helper(land, i, j + 1);
         
-        if(left == 0 && right == 0 && top == 0 && bottom == 0) {
+        if(right == 0 && bottom == 0) {
             List<Integer> subList = list.get(list.size() - 1);
             subList.add(i);
             subList.add(j);
