@@ -2,24 +2,27 @@ class Solution {
     List<List<Integer>> list = new ArrayList<>();
     public int[][] findFarmland(int[][] land) {
         for(int i = 0; i < land.length; i++) {
-            for(int j = 0; j < land[i].length; j++) {
-                if(land[i][j] == 1) {
-                    List<Integer> subList = new ArrayList<>();
-                    subList.add(i);
-                    subList.add(j);
-                    list.add(subList);
-                    helper(land,i,j);
-                }
-            }
+            check(land, i);
         }
         int[][] ans = new int[list.size()][4];
         for(int i = 0; i < list.size(); i++) 
             for(int j = 0; j < 4; j++) 
                 ans[i][j] = list.get(i).get(j);
 
-        // ans[(ans.length - 1)][3]++;
         return ans;
     }
+    void check(int[][] land, int i) {
+        for(int j = 0; j < land[i].length; j++) {
+            if(land[i][j] == 1) {
+                List<Integer> subList = new ArrayList<>();
+                subList.add(i);
+                subList.add(j);
+                list.add(subList);
+                helper(land,i,j);
+            }
+        }
+    }
+
     int helper(int[][] land, int i, int j) {
         if(land[i][j] == 0) return 0;
         land[i][j] = 0;
