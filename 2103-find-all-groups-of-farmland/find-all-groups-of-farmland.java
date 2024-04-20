@@ -1,40 +1,34 @@
 class Solution {
-    List<List<Integer>> list = new ArrayList<>();
     public int[][] findFarmland(int[][] land) {
-        for(int i = 0; i < land.length; i++) {
-            check(land, i);
-        }
+        List<int[]> list = new ArrayList<>();
+        for(int i = 0; i < land.length; i++) 
+            for(int j = 0; j < land[i].length; j++) 
+                if(land[i][j] == 1) 
+                    list.add(helper(land,i,j));
+                
         int[][] ans = new int[list.size()][4];
         for(int i = 0; i < list.size(); i++) 
             for(int j = 0; j < 4; j++) 
-                ans[i][j] = list.get(i).get(j);
+                ans[i] = list.get(i);
 
         return ans;
     }
-    void check(int[][] land, int i) {
-        for(int j = 0; j < land[i].length; j++) {
-            if(land[i][j] == 1) {
-                List<Integer> subList = new ArrayList<>();
-                subList.add(i);
-                subList.add(j);
-                list.add(subList);
-                helper(land,i,j);
-            }
-        }
-    }
-
-    int helper(int[][] land, int i, int j) {
-        if(land[i][j] == 0) return 0;
-        land[i][j] = 0;
-        int right = 0, bottom = 0;
-        if(i < land.length - 1) bottom = helper(land, i + 1, j);
-        if(j < land[i].length - 1) right = helper(land, i, j + 1);
+    int[] helper(int[][] land, int i, int j) {
+        int[] arr = new int[4];
+        arr[0] = i;
+        arr[1] = j;
         
-        if(right == 0 && bottom == 0) {
-            List<Integer> subList = list.get(list.size() - 1);
-            subList.add(i);
-            subList.add(j);
-        }
-        return 1;
+        int row = i, col = j;
+        
+        while (row < land.length && land[row][j] == 1) row++;
+        while (col < land[0].length && land[i][col] == 1) col++;
+        arr[2] = row - 1;
+        arr[3] = col - 1;
+    
+        for (int k = i; k < row; k++) 
+            for (int l = j; l < col; l++) 
+                land[k][l] = 0;
+        
+        return arr;
     }
 }
