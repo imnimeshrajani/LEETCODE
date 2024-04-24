@@ -3,7 +3,7 @@ class Solution {
         int left = 0, right = numbers.length - 1, small = numbers[left], big = numbers[right];
         while (small + big != target) {
             if(small + big > target) big = numbers[--right];
-            if(small + big < target) small = numbers[++left];
+            else if(small + big < target) small = numbers[++left];
         }
         return new int[]{++left, ++right};
     }
