@@ -5,24 +5,24 @@ class Solution {
         if((numerator > 0) != (denominator > 0)) ans.append("-");
 
         long num = Math.abs((long) numerator), deno = Math.abs((long) denominator);
-        long divided = num / deno, remains = num % deno;
+        long divided = num / deno, module = num % deno;
         ans.append(divided);
 
-        if(remains == 0) return ans.toString();
+        if(module == 0) return ans.toString();
         else {
             HashMap<Long, Integer> map = new HashMap<>();
             ans.append(".");
-            while(remains != 0){
-                if(map.containsKey(remains)) {
-                    ans.insert(map.get(remains), "(");
+            while(module != 0){
+                if(map.containsKey(module)) {
+                    ans.insert(map.get(module), "(");
                     ans.append(")");
                     break;
                 } 
                 else {
-                    map.put(remains, ans.length());
-                    remains *= 10;
-                    divided = remains / deno;
-                    remains = remains % deno;
+                    map.put(module, ans.length());
+                    module *= 10;
+                    divided = module / deno;
+                    module = module % deno;
                     ans.append(divided);
                 }
             }
