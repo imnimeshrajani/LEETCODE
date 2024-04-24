@@ -10,8 +10,8 @@ class Solution {
 
         if(remains == 0) return ans.toString();
         else {
-            ans.append(".");
             HashMap<Long, Integer> map = new HashMap<>();
+            ans.append(".");
             while(remains != 0){
                 if(map.containsKey(remains)) {
                     ans.insert(map.get(remains), "(");
