@@ -3,33 +3,27 @@ class Solution {
         if(numerator == 0) return "0";
         StringBuilder ans = new StringBuilder();
         ans.append(((numerator>0) ^ (denominator>0)) ? "-" : "");
-        long num = Math.abs((long)numerator);
-        long deno = Math.abs((long)denominator);
 
-        long quotient = num/deno;
-        long rem = num%deno;
-        ans.append(quotient);
+        long num = Math.abs((long)numerator), deno = Math.abs((long)denominator);
+        long afterDiv = num/deno, remains = num%deno;
+        ans.append(afterDiv);
 
-        if(rem==0) return ans.toString();
-        else{
+        if(remains==0) return ans.toString();
+        else {
             ans.append(".");
-
             HashMap<Long, Integer> map = new HashMap<>();
-            while(rem!=0){
-
-                if(map.containsKey(rem)){
-                    int temp = map.get(rem);
-                    ans.insert(temp, "(");
+            while(remains!=0){
+                if(map.containsKey(remains)) {
+                    ans.insert(map.get(remains), "(");
                     ans.append(")");
                     break;
                 } 
-                else{
-                    map.put(rem, ans.length());
-
-                    rem *= 10;
-                    quotient = rem/deno;
-                    rem = rem%deno;
-                    ans.append(quotient);
+                else {
+                    map.put(remains, ans.length());
+                    remains *= 10;
+                    afterDiv = remains/deno;
+                    remains = remains%deno;
+                    ans.append(afterDiv);
                 }
             }
         }
