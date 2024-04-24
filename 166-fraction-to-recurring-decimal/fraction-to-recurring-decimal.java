@@ -2,11 +2,11 @@ class Solution {
     public String fractionToDecimal(int numerator, int denominator) {
         if(numerator == 0) return "0";
         StringBuilder ans = new StringBuilder();
-        ans.append(((numerator > 0) != (denominator > 0)) ? "-" : "");
+        if((numerator > 0) != (denominator > 0)) ans.append("-");
 
         long num = Math.abs((long) numerator), deno = Math.abs((long) denominator);
-        long afterDiv = num / deno, remains = num % deno;
-        ans.append(afterDiv);
+        long divided = num / deno, remains = num % deno;
+        ans.append(divided);
 
         if(remains == 0) return ans.toString();
         else {
@@ -21,9 +21,9 @@ class Solution {
                 else {
                     map.put(remains, ans.length());
                     remains *= 10;
-                    afterDiv = remains / deno;
+                    divided = remains / deno;
                     remains = remains % deno;
-                    ans.append(afterDiv);
+                    ans.append(divided);
                 }
             }
         }
