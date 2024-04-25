@@ -4,12 +4,12 @@ class Solution {
         // int ans = 0;
         // for(char c : s.toCharArray()) {
         //     int val = c - 'a';
-        //     for(int j = val; j >= 0 && j >= val - k; j--){
+        //     for(int j = val; j >= 0 && j >= val - k; j--)
         //         dp[val] = Math.max(dp[val], dp[j] + 1);
-        //     }
-        //     for(int j = val + 1; j < 26 && j <= val + k; j++){
+        //
+        //     for(int j = val + 1; j < 26 && j <= val + k; j++)
         //         dp[val] = Math.max(dp[val], dp[j] + 1);
-        //     }
+        //
         //     ans = Math.max(ans,dp[val]);
         // }
         // return ans;
@@ -22,12 +22,11 @@ class Solution {
             int idx = cc - 'a';
             int max  = Integer.MIN_VALUE;
             
-            int left = Math.max((idx-k), 0);
+            int left = Math.max((idx - k), 0);
             int right = Math.min((idx + k), 26);
             
-            for(int j = left; j <= right ; j++){
-                max = Math.max(max, dp[j]);
-            }
+            while (left <= right)
+                max = Math.max(max, dp[left++]);
             
             dp[idx] = max+1;
         }
