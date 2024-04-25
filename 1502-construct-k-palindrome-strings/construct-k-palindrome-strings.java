@@ -1,5 +1,6 @@
 class Solution {
     public boolean canConstruct(String s, int k) {
+        if(k == s.length()) return true;
         if(k > s.length()) return false;
         int freq[] = new int[26], count = 0;
         for(char c : s.toCharArray()) 
