@@ -6,10 +6,9 @@ class Solution {
             else if(i < pivot) smallerCount++;
         while (pivotCount-- > 0) 
             ans[smallerCount++] = pivot;
-        for(int i : nums) {
+        for(int i : nums)
             if(i > pivot)  ans[smallerCount++] = i;
             else if(i < pivot) ans[start++] = i;
-        }
         return ans;
     }
 }
