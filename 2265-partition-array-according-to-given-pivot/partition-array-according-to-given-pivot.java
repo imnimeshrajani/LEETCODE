@@ -1,6 +1,6 @@
 class Solution {
     public int[] pivotArray(int[] nums, int pivot) {
-        int n = nums.length, pivotCount = 0, smallerCount = 0, ans[] = new int[n], start = 0;
+        int pivotCount = 0, smallerCount = 0, ans[] = new int[nums.length], start = 0;
         for (int i :  nums) 
             if(i == pivot) pivotCount++;
             else if(i < pivot) smallerCount++;
