@@ -1,5 +1,11 @@
 class Solution {
     public boolean canCross(int[] stones) {
+        if(stones[1] != 1) return false;
+        int n = stones.length;
+        int stonesFarthest = (n * (n + 1)) / 2;
+        if (stones[n - 1] - stones[0] > stonesFarthest) {
+            return false;
+        } 
         Map<Integer, Set<Integer>> map = new HashMap<>();
         for(int i : stones) map.put(i, new HashSet<Integer>());
         map.get(stones[0]).add(1);
@@ -14,6 +20,6 @@ class Solution {
                 }
             }
         }
-        return !map.get(stones[stones.length - 1]).isEmpty();
+        return !map.get(stones[n - 1]).isEmpty();
     }
 }
