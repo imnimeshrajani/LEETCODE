@@ -36,7 +36,7 @@ class Solution {
         }
         ListNode temp = head;
         while(temp!= null){
-            temp.val = (temp.val*2)%10;
+            temp.val = (temp.val * 2) % 10;
             if(temp.next != null && temp.next.val > 4){
                 temp.val++;
             }
