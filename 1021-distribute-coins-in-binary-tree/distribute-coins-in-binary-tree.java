@@ -23,8 +23,7 @@ class Solution {
         if(root == null) return 0;
         int left = helper(root.left), right = helper(root.right);
         int coins = left + right;
-        if(root.val == 0) coins--;
-        else coins += --root.val;
+        coins += (root.val == 0) ? -1 : --root.val;
         ans += Math.abs(coins);
         return coins;
     }
