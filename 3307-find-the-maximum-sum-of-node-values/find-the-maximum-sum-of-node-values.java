@@ -22,12 +22,11 @@ class Solution {
         for( int val : nums) {
             if ((val ^ k) > val ) {
                 sum += val ^ k;
-                minExtra = Math.min(minExtra, (val ^ k)- val);
                 count++;
             } else {
                 sum += val;
-                minExtra = Math.min(minExtra, val - (val ^ k));
             }
+            minExtra = Math.min(minExtra, Math.abs((val ^ k)- val));
         }
 
         return (count % 2 == 0 ) ? sum : sum - minExtra;
