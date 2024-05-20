@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+SELECT DISTINCT c1.id, c1.movie, c1.description, c1.rating FROM Cinema as c1 JOIN Cinema as c2 ON c1.id % 2 = 1 AND c1.description != "boring" ORDER BY c1.rating DESC;
