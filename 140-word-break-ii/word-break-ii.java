@@ -17,8 +17,7 @@ class Solution {
                         sb.append(word);
                         sb.append(" ");
                     }
-                    sb.deleteCharAt(sb.length() - 1);
-                    ans.add(sb.toString());
+                    ans.add(sb.toString().trim());
                 } else helper(s, set, i, arr);
                 arr.remove(arr.size() - 1);
             }
