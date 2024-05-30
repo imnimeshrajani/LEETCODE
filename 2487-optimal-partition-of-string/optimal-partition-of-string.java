@@ -2,12 +2,13 @@ class Solution {
     public int partitionString(String s) {
         Set<Character> set = new HashSet<>();
         int i = 0, ans = 1;
-        while(i < s.length()) {
-            if(set.contains(s.charAt(i))) {
+        char[] arr = s.toCharArray();
+        while(i < arr.length) {
+            if(set.contains(arr[i])) {
                 ans++;
                 set = new HashSet<>();
             }
-            set.add(s.charAt(i++));
+            set.add(arr[i++]);
         }
         return ans;
     }
