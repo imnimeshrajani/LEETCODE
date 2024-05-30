@@ -1,6 +1,5 @@
 class Solution {
     public void solveSudoku(char[][] board) {
-        // Start solving sudoku from the first cell
         solve(board, 0, 0);
     }
 
