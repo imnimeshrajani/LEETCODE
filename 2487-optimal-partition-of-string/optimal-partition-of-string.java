@@ -6,7 +6,7 @@ class Solution {
         while(i < arr.length) {
             if(set.contains(arr[i])) {
                 ans++;
-                set = new HashSet<>();
+                set.clear();
             }
             set.add(arr[i++]);
         }
