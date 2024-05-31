@@ -13,11 +13,8 @@ class Solution {
     }
 
     boolean verticalCheck(char[][] board, char[] word, int row, int col) {
-        if(row - 1 >= 0 && board[row - 1][col] != '#')
+        if(row - 1 >= 0 && board[row - 1][col] != '#' || row + word.length > board.length)
             return false;
-        if(row + word.length > board.length)
-            return false;
-        // if(row + word.length <= board[0].length) {
         if(row + word.length < board.length && board[row + word.length][col] != '#')
             return false;
         else {
@@ -26,7 +23,6 @@ class Solution {
                 else return false;
             }
         }
-        // }
         return true;
     }
 
