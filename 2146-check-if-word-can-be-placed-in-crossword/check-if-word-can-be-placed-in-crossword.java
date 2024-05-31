@@ -17,12 +17,11 @@ class Solution {
             return false;
         if(row + word.length < board.length && board[row + word.length][col] != '#')
             return false;
-        else {
-            for(int i = row; i < row + word.length; i++) {
+        else 
+            for(int i = row; i < row + word.length; i++) 
                 if(board[i][col] == word[i - row] || board[i][col] == ' ') continue;
                 else return false;
-            }
-        }
+            
         return true;
     }
 
@@ -32,12 +31,10 @@ class Solution {
         if(col + word.length <= board[0].length) {
             if(col + word.length < board[0].length && board[row][col + word.length] != '#')     
                 return false;
-            else {
-                for(int i = col; i < col + word.length; i++) {
+            else 
+                for(int i = col; i < col + word.length; i++) 
                     if(board[row][i] == word[i - col] || board[row][i] == ' ') continue;
                     else return false;
-                }
-            }
         }
         return true;
     }
