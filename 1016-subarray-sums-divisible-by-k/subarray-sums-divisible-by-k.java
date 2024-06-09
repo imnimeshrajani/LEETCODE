@@ -12,8 +12,8 @@ class Solution {
         // }
         // return ans;
 
-        int count=0,sum=0,rem;
-        int md[]=new int[k];
+        int count = 0, sum = 0,rem = 0;
+        int md[] = new int[k];
         for(int i : nums) {
             sum += i;
             rem = sum % k;
@@ -25,7 +25,7 @@ class Solution {
             if(i > 1)
                 count += (i * (i - 1)) /2;
 
-        count+=md[0];
+        count += md[0];
         return count;
     }
 }
