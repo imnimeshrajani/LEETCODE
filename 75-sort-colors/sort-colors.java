@@ -11,11 +11,9 @@ class Solution {
         //     else if(G-- > 0) nums[i] = 1;
         //     else if(B-- > 0) nums[i] = 2;
         // }
-        for (int i = 0, start = 0, end = nums.length - 1; i <= end; i++) {
+        for (int i = 0, start = 0, end = nums.length - 1; i <= end; i++) 
             if(nums[i] == 0) swap(nums, i, start++);
             else if(nums[i] == 2) swap(nums, i--, end--);
-            
-        }
     }
     void swap(int[] nums, int i, int j) {
         int temp = nums[i];
