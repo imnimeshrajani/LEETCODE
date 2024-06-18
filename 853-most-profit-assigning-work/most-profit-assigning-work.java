@@ -1,5 +1,6 @@
 class Solution {
     public int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
+        if (difficulty.length != profit.length) return 0;
         int max = 0, ans = 0;
         for(int i : difficulty) max = Math.max(max, i);
         int[] arr = new int[max + 1];
