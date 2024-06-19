@@ -1,28 +1,26 @@
 class Solution {
     public int minDays(int[] bloomDay, int m, int k) {
         if((long) m * k > bloomDay.length) return -1;
-        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
-        for(int i : bloomDay) {
-            min = Math.min(min, i);
+        int ans = -1, min = 0, max = Integer.MIN_VALUE;
+        for(int i : bloomDay) 
             max = Math.max(max, i);
-        }
+        
         while(min <= max) {
-            int mid = min + (max - min) / 2, flowersCount = helper(bloomDay, mid, k);
-            if(flowersCount < m) min = mid + 1;
-            else max = mid - 1;
+            int mid = min + (max - min) / 2, boques = 0, count = 0;
+            for(int i=0; i<bloomDay.length; i++){
+                while(i != bloomDay.length && bloomDay[i] <= mid){
+                    count++;
+                    i++;
+                }
+                boques+= count / k;
+                count = 0;
+            }
+            if(boques >= m) {
+                ans = mid; 
+                max = mid - 1;
+            } else min = mid + 1;
         }
-        return min;
+        return ans;
     }
     
-    int helper(int[] arr, int day, int k) {
-        int bouquets = 0, collectedFlowers = 0;
-        for(int i : arr) {
-            collectedFlowers = (i <= day) ? ++collectedFlowers : 0;
-            if(collectedFlowers == k) {
-                bouquets++;
-                collectedFlowers = 0;
-            }
-        }
-        return bouquets;
-    }
 }
