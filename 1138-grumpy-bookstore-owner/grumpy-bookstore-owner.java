@@ -1,6 +1,6 @@
 class Solution {
     public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
-        int ans = 0, n = grumpy.length, sum = 0, max = 0, start = 0, end = 0, diff = minutes;
+        int ans = 0, n = grumpy.length, sum = 0, max = 0, start = 0, end = 0;
         for(int i = 0; i < n; i++) {
             if(grumpy[i] == 0) {
                 ans += customers[i];
