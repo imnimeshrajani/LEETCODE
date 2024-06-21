@@ -7,8 +7,6 @@ class Solution {
                 customers[i] = 0;
             }
         }
-        System.out.println(Arrays.toString(customers));
-        System.out.println(ans);
         while(end < n) {
             if(minutes > 0) {
                 sum += customers[end++];
