@@ -8,13 +8,8 @@ class Solution {
             }
         }
         while(end < n) {
-            if(minutes > 0) {
-                sum += customers[end++];
-                minutes--;
-            } else {
-                sum -= customers[start++];
-                minutes++;
-            }
+            sum = (minutes > 0) ? sum + customers[end++] : sum - customers[start++];
+            minutes += (minutes > 0) ? -1 : 1;
             max = Math.max(max, sum);
         }
         return ans + max;
