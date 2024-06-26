@@ -29,8 +29,12 @@ class Solution {
 
     TreeNode helper(int start, int end) {
         if(start > end) return null;
-        int mid = start + (end - start) / 2;
-        TreeNode root = new TreeNode(values.get(mid), helper(start, mid - 1), helper(mid + 1, end));
-        return root;
+        else if(start == end) return new TreeNode(values.get(start));
+        else {
+            int mid = start + (end - start) / 2;
+            TreeNode root = new TreeNode(values.get(mid), helper(start, mid - 1), helper(mid + 1, end));
+            return root;
+        }
+        
     }
 }
