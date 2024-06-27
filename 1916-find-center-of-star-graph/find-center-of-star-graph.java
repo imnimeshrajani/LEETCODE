@@ -1,16 +1,6 @@
 class Solution {
     public int findCenter(int[][] edges) {
-        int freq[] = new int[edges.length + 2], max = 0, ans = 0;
-        for(int[] i : edges) {
-            freq[i[0]]++;
-            freq[i[1]]++;
-        } 
-        for(int i = 0; i < freq.length; i++) {
-            if(freq[i] > max) {
-                max = freq[i];
-                ans = i;
-            }
-        }
-        return ans;
+        int a = edges[0][0], b = edges[0][1];
+        return (a == edges[1][0] || a == edges[1][1]) ? a : b;
     }
 }
