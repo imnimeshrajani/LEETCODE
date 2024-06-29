@@ -9,9 +9,6 @@ class Solution {
             arr[edge[0]].add(edge[1]);
         for(int i = 0; i < n; i++) 
             helper(arr, i, i, ans, new boolean[n]);
-        for(List<Integer> list : ans)
-            Collections.sort(list);
-
         return ans;
     }
     void helper(ArrayList<Integer>[] arr, int prev, int curr, List<List<Integer>> ans, boolean[] visited) {
