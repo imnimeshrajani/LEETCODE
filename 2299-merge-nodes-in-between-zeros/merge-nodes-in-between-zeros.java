@@ -10,21 +10,18 @@
  */
 class Solution {
     public ListNode mergeNodes(ListNode head) {
-        ListNode ans = new ListNode(), result = new ListNode(0, ans);
-        while(head.next != null) {
+        ListNode pointer = head.next, nextNode = pointer;
+        while(nextNode != null) {
             int sum = 0;
-            while(head.next.val != 0) {
-                sum += head.val;
-                head = head.next;
+            while(nextNode.val != 0) {
+                sum += nextNode.val;
+                nextNode = nextNode.next;
             }
-            sum += head.val;
-            ans.val = sum;
-            head = head.next;
-            if(head.next != null) 
-                ans = ans.next = new ListNode();
-            
+            pointer.val = sum;
+            nextNode = nextNode.next;
+            pointer.next = nextNode;
+            pointer = pointer.next;
         }
-        ans = null;
-        return result.next;
+        return head.next;
     }
 }
