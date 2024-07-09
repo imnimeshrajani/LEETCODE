@@ -6,6 +6,6 @@ class Solution {
             time = (time < arr[0]) ? arr[0] + arr[1] : time + arr[1];
             waiting += time - arr[0];    
         }
-        return (double) waiting / customers.length;
+        return waiting / customers.length;
     }
 }
