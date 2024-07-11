@@ -15,7 +15,7 @@ class FooBar {
                 while(!flag) wait();
         	    printFoo.run();
                 flag = false;
-                notifyAll();
+                notify();
             }
         }
     }
@@ -29,7 +29,7 @@ class FooBar {
                 while(flag) wait();
                 printBar.run();
                 flag = true;
-                notifyAll();
+                notify();
             }
         }
     }
