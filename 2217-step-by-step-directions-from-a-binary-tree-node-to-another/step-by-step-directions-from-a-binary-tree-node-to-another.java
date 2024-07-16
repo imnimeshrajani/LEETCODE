@@ -20,7 +20,9 @@ class Solution {
         helper(root, destValue, destination);
         int i = 0, min = Math.min(start.length(), destination.length());
         while(i < min && start.charAt(start.length() - i - 1) == destination.charAt(destination.length() - i - 1)) i++;
-        StringBuilder ans = new StringBuilder("U".repeat(start.length() - i));
+        // StringBuilder ans = new StringBuilder("U".repeat(start.length() - i));
+        StringBuilder ans = new StringBuilder();
+        for(int idx = 0; idx < start.length() - i; idx++) ans.append("U");
         ans.append(destination.reverse().toString().substring(i));
         return ans.toString();
     }
