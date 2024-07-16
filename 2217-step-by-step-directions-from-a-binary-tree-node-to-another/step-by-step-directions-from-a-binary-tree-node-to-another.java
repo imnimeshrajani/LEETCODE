@@ -20,7 +20,9 @@ class Solution {
         helper(root, destValue, destination);
         int i = 0, min = Math.min(start.length(), destination.length());
         while(i < min && start.charAt(start.length() - i - 1) == destination.charAt(destination.length() - i - 1)) i++;
-        return "U".repeat(start.length() - i) + destination.reverse().toString().substring(i);
+        StringBuilder ans = new StringBuilder("U".repeat(start.length() - i));
+        ans.append(destination.reverse().toString().substring(i));
+        return ans.toString();
     }
 
     boolean helper(TreeNode node, int value, StringBuilder str) {
