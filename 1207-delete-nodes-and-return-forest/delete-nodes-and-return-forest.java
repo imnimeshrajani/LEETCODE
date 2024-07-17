@@ -16,17 +16,17 @@
 class Solution {
     public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
         List<TreeNode> list = new ArrayList<>();
-        Set<Integer> set = new HashSet<>();
-        for(int target : to_delete) set.add(target);
+        boolean[] set = new boolean[1001];
+        for(int target : to_delete) set[target] = true;
         helper(root, list, set);
-        if(!set.contains(root.val)) list.add(root);
+        if(!set[root.val]) list.add(root);
         return list;
     }
-    TreeNode helper(TreeNode root, List<TreeNode> list, Set<Integer> set) {
+    TreeNode helper(TreeNode root, List<TreeNode> list, boolean[] set) {
         if(root == null) return null;
         root.left = helper(root.left, list, set);
         root.right = helper(root.right, list, set);
-        if(set.contains(root.val)) {
+        if(set[root.val]) {
             if(root.left != null) list.add(root.left);
             if(root.right != null) list.add(root.right);
             return null;
