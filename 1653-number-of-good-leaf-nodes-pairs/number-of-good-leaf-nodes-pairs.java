@@ -1,48 +1,48 @@
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
  * }
  */
 class Solution {
     public int countPairs(TreeNode root, int distance) {
-        List<TreeNode> leaves = new ArrayList<>();
-        Map<TreeNode, List<TreeNode>> map = new HashMap<>();
-        findLeaves(root, new ArrayList<>(), leaves, map);
-        int ans = 0;
-        for(int i = 0; i < leaves.size() - 1; i++) {
-            for(int j = i + 1; j < leaves.size(); j++) {
-                List<TreeNode> leaf1 = map.get(leaves.get(i)), leaf2 = map.get(leaves.get(j));
-                for(int k = 0; k < Math.min(leaf1.size(), leaf2.size()); k++) {
-                    if(leaf1.get(k) != leaf2.get(k)) {
-                        if(((leaf1.size() - k) + (leaf2.size() - k)) <= distance) ans++;
-                        break;
-                    }
-                }
+        int[] result = new int[1];
+        dfs(root, distance, result);
+        return result[0];
+    }
+
+    private int[] dfs(TreeNode node, int distance, int[] result) {
+        if (node == null) {
+            return new int[distance + 1];
+        }
+        if (node.left == null && node.right == null) {
+            int[] leafDistance = new int[distance + 1];
+            leafDistance[1] = 1;
+            return leafDistance;
+        }
+
+        int[] left = dfs(node.left, distance, result);
+        int[] right = dfs(node.right, distance, result);
+
+        for (int i = 1; i <= distance; i++) {
+            for (int j = 1; j <= distance - i; j++) {
+                result[0] += left[i] * right[j];
             }
         }
-        return ans;
 
-    }
-    void findLeaves(TreeNode node, List<TreeNode> path, List<TreeNode> leaves, Map<TreeNode, List<TreeNode>> map) {
-        if(node == null) return;
-        List<TreeNode> list = new ArrayList<>(path);
-        list.add(node);
-        if(node.left == null && node.right == null) {
-            map.put(node, list);
-            leaves.add(node);
-            return;
+        int[] leafDistance = new int[distance + 1];
+        for (int i = 1; i < distance; i++) {
+            leafDistance[i + 1] = left[i] + right[i];
         }
-        findLeaves(node.left, list, leaves, map);
-        findLeaves(node.right, list, leaves, map);
+        return leafDistance;
     }
 }
