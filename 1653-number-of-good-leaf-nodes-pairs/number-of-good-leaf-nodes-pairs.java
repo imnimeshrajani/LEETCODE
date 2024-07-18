@@ -14,13 +14,13 @@
  * }
  */
 class Solution {
+    int result = 0;
     public int countPairs(TreeNode root, int distance) {
-        int[] result = new int[1];
-        dfs(root, distance, result);
-        return result[0];
+        dfs(root, distance);
+        return result;
     }
 
-    private int[] dfs(TreeNode node, int distance, int[] result) {
+    private int[] dfs(TreeNode node, int distance) {
         if (node == null) {
             return new int[distance + 1];
         }
@@ -30,19 +30,17 @@ class Solution {
             return leafDistance;
         }
 
-        int[] left = dfs(node.left, distance, result);
-        int[] right = dfs(node.right, distance, result);
+        int[] left = dfs(node.left, distance);
+        int[] right = dfs(node.right, distance);
 
-        for (int i = 1; i <= distance; i++) {
-            for (int j = 1; j <= distance - i; j++) {
-                result[0] += left[i] * right[j];
-            }
-        }
-
+        for (int i = 1; i <= distance; i++) 
+            for (int j = 1; j <= distance - i; j++) 
+                result += left[i] * right[j];
+            
         int[] leafDistance = new int[distance + 1];
-        for (int i = 1; i < distance; i++) {
+        for (int i = 1; i < distance; i++) 
             leafDistance[i + 1] = left[i] + right[i];
-        }
+        
         return leafDistance;
     }
 }
