@@ -1,7 +1,23 @@
 class Solution {
     public int[] sortArray(int[] nums) {
-        mergeSort(nums, 0, nums.length - 1);
+        int min= nums[0], max = nums[0];
+        for(int val : nums) {
+            min = Math.min(min, val);
+            max = Math.max(max, val);
+        }
+        int n = max - min, index = 0, arr[] = new int[n + 1];
+
+        for (int num : nums) arr[num - min]++;
+
+        for (int i = 0; i <= n; i++) {
+            while (arr[i]-- > 0) 
+                nums[index++] = min;
+            min++;
+        }
+
         return nums;
+        // mergeSort(nums, 0, nums.length - 1);
+        // return nums;
     }
 
     void mergeSort(int[] nums, int left, int right) {
