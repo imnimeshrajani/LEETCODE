@@ -9,7 +9,7 @@ class Solution {
         
 
         int res = sum;
-        int ans = Math.min(k - sum, k);
+        int ans = k - sum;
 
         for (int i = 0; i < nums.length; i++) {
             sum = sum - nums[i] + nums[(i + k) % nums.length];
