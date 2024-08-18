@@ -1,6 +1,5 @@
 class Solution {
     public int nthUglyNumber(int n) {
-        
         int c2 = 0,c3 = 0,c5 = 0;
         int[] dp = new int[n+1];
         dp[0] = 1;
