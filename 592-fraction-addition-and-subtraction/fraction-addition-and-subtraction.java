@@ -1,11 +1,16 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 class Solution {
     public String fractionAddition(String expression) {
         String[] parts = expression.split("(?=[+-])");
         // System.out.print(Arrays.toString(parts));
         int num = 0, den = 1;
-        for(String part : parts) {
-            String[] numStr = part.split("/");
-            int number1 = Integer.parseInt(numStr[0]), number2 = Integer.parseInt(numStr[1]);
+        Pattern pattern = Pattern.compile("([+-]?\\d+)/(\\d+)");
+        Matcher matcher = pattern.matcher(expression);
+        
+        while (matcher.find()) {
+            int number1 = Integer.parseInt(matcher.group(1));
+            int number2 = Integer.parseInt(matcher.group(2));
             num = (num * number2) + (den * number1);
             den *= number2;
             int gcdValue = gcd(Math.abs(num), den);
