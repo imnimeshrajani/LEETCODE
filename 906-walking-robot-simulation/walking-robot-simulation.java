@@ -51,7 +51,7 @@ class Solution {
             return x == ((Obstacle) other).x && y == ((Obstacle) other).y;
         }
         public int hashCode() {
-            return x + y * 7;
+            return x + y;
         }
     }
 }
