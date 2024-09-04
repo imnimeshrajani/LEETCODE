@@ -1,35 +1,57 @@
 class Solution {
     public int robotSim(int[] commands, int[][] obstacles) {
-
-        HashSet<String> obs = new HashSet<>();
+        Robot robot = new Robot();
+        Set<Obstacle> obstacleSet = new HashSet<>();
         for (int[] obstacle : obstacles) {
-            obs.add(obstacle[0] + "," + obstacle[1]);
+            obstacleSet.add(new Obstacle(obstacle[0], obstacle[1]));
         }
+        for (int command : commands) robot.handleCommand(command, obstacleSet);
+        return robot.maxDistance;
+    }
+    private static class Robot {
+        public int x = 0, y = 0, dir = 0, maxDistance = 0;
+        public Set<Obstacle> obstacles;
 
-        int x = 0, y = 0, dx = 0, dy = 1;
-        int ans = 0;
-
-        for (int c : commands) {
-            if (c == -1) {
-                int temp = dx;
-                dx = dy;
-                dy = -temp;
-            } else if (c == -2) { 
-                int temp = dx;
-                dx = -dy;
-                dy = temp;
-            } else {
-                for (int i = 0; i < c; i++) {
-                    int xx = x + dx;
-                    int yy = y + dy;
-
-                    if (obs.contains(xx + "," + yy)) break;
-                    x = xx;
-                    y = yy;
-                    ans = Math.max(ans, x * x + y * y); }
+        Robot() {}
+        private void handleCommand(int command, Set<Obstacle> obstacles) {
+            switch (command) {
+                case -2:
+                    dir = (dir + 3) % 4;
+                    return;
+                case -1:
+                    dir = (dir + 1) % 4;
+                    return;
+                default: {
+                    while (command-- > 0) {
+                        int newX = x, newY = y;
+                        switch (dir) {
+                            case 0: ++newY; break;
+                            case 1: ++newX; break;
+                            case 2: --newY; break;
+                            default: --newX;
+                        }
+                        if (!obstacles.contains(new Obstacle(newX, newY))) {
+                            x = newX;
+                            y = newY;
+                        }
+                    }
+                    maxDistance = Math.max(x * x + y * y, maxDistance);
+                }
             }
         }
+    }
+    private static class Obstacle {
+        public int x, y;
 
-        return ans;
+        public Obstacle(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+        public boolean equals(Object other) {
+            return x == ((Obstacle) other).x && y == ((Obstacle) other).y;
+        }
+        public int hashCode() {
+            return x + y * 413;
+        }
     }
 }
