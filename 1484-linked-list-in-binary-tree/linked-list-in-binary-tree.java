@@ -36,10 +36,8 @@ class Solution {
     }
 
     public boolean check(ListNode head, TreeNode root) {
-
         if (head == null) return true;
         if (root == null) return false;
         return (root.val == head.val) ? check(head.next, root.left) || check(head.next, root.right) : false;
-
     }
 }
