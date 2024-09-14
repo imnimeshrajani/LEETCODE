@@ -4,10 +4,8 @@ class Solution {
         for(int val : nums) max = Math.max(max, val);
         for(int i = 0; i < nums.length; i++) {
             if(nums[i] == max) {
-                while(i < nums.length && nums[i++] == max) count++;
-                ans = Math.max(ans, count);
-                count = 0;
-            }
+                ans = Math.max(ans, ++count);
+            } else count = 0;
         }
         return ans;
     }
