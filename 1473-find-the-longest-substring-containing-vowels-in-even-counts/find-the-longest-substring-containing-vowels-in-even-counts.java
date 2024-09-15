@@ -1,19 +1,36 @@
 class Solution {
     public int findTheLongestSubstring(String s) {
-        HashMap<Integer, Integer> mp = new HashMap<>();
-        mp.put(0,-1);
-        int cnt = 0, ans = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == 'a' || s.charAt(i) == 'e' || s.charAt(i) == 'i' || s.charAt(i) == 'o' || s.charAt(i) == 'u') {
-                cnt ^= (1 << ((int)(s.charAt(i) - 'a')));
+        char[] chars = s.toCharArray();
+        int n = chars.length;
+        int state = 0;
+        int[] pos = new int[32];
+        Arrays.fill(pos, -2);
+        pos[0] = -1;
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            switch (chars[i]) {
+                case 'a':
+                    state ^= 1;
+                    break;
+                case 'e':
+                    state ^= 2;
+                    break;
+                case 'i':
+                    state ^= 4;
+                    break;
+                case 'o':
+                    state ^= 8;
+                    break;
+                case 'u':
+                    state ^= 16;
+                    break;
             }
-            if (mp.containsKey(cnt)) {
-                ans = Math.max(ans, i - mp.get(cnt));
+            if (pos[state] < -1) {
+                pos[state] = i;
             } else {
-                mp.put(cnt, i);
+                res = Math.max(res, i - pos[state]);
             }
         }
-        return ans;
+        return res;
     }
 }
