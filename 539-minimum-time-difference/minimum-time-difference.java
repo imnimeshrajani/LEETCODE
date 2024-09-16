@@ -22,7 +22,7 @@ class Solution {
         boolean[] selectedTime = new boolean[24 * 60];
         for(String time : timePoints) {
             int hours = Integer.valueOf(time.substring(0, 2));
-            int min = Integer.valueOf(time.substring(3, 5));
+            int min = Integer.valueOf(time.substring(3));
             if(selectedTime[(hours * 60) + min]) return 0;
             selectedTime[(hours * 60) + min] = true;
         }
