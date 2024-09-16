@@ -18,6 +18,7 @@ class Solution {
         // } 
         // return ans;
 
+        if (timePoints.size() > 1440) return 0; 
         boolean[] selectedTime = new boolean[24 * 60];
         for(String time : timePoints) {
             int hours = Integer.valueOf(time.substring(0, 2));
