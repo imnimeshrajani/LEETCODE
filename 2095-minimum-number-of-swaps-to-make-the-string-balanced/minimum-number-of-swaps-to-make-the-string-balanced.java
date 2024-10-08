@@ -1,17 +1,16 @@
 class Solution {
     public int minSwaps(String s) {
-        Stack<Character> stack = new Stack<>();
-        for(char ch : s.toCharArray()) {
-            if(ch == '[')
-                stack.push(ch);
-            else {
-                if(!stack.isEmpty() && stack.peek() == '[')
-                    stack.pop();
-                else
-                    stack.push(ch);
-            }
+        int opening = 0;
+        int unbalanced = 0;
+
+        for (var c: s.getBytes()) {
+            if (c == '[')
+                opening++;
+            else 
+                if (opening > 0) opening--;
+                else unbalanced++;    
         }
-        int unb = stack.size()/2;
-        return (unb+1)/2;
+
+        return unbalanced / 2 + unbalanced % 2;
     }
 }
