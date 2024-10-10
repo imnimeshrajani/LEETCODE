@@ -1,25 +1,25 @@
 class Solution {
-    public int maxWidthRamp(int[] A) {
-        int n = A.length;
-        int i, j , max = 0;
-        int[] maxR = new int[n], minL = new int[n];
-        minL[0] = A[0];
-        for (i = 1; i < n; i++){
-            minL[i] = Math.min(A[i], minL[i - 1]);
+    public int maxWidthRamp(int[] nums) {
+        int low = 1, high = nums.length-1, res = 0;
+
+        while(low <= high) {
+            int mid = low + (high - low)/2;
+            if(possible(nums, mid)) {
+                res = mid;
+                low = mid + 1;
+            } else high = mid - 1;
         }
-        maxR[n - 1] = A[n - 1];
-        for (j = n - 2; j >= 0; j--){
-            maxR[j] = Math.max(A[j], maxR[j + 1]);
-        }
-        i = 0; j = 0;
-        while (i < n && j < n){
-            if (minL[i] <= maxR[j]){
-                max = Math.max(max, j - i);
-                j++;
-            }else{
-                i++;
-            }
-        }
-        return max;
+        return res;
+    }
+
+    private boolean possible(int[] nums, int width) {
+        int i=0,j=width;
+        int min = nums[i];
+        while(j < nums.length) {
+            if(nums[j] >= min) return true;
+            j++;
+            min = Math.min(min, nums[++i]);
+        }   
+        return false;
     }
 }
