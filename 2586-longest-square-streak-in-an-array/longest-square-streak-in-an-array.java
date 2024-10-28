@@ -2,26 +2,29 @@ import java.util.*;
 
 class Solution {
     public int longestSquareStreak(int[] nums) {
-        TreeSet<Integer> sortedSet = new TreeSet<>();
-        for (int num : nums) 
-            sortedSet.add(num);
-        
-        
-        HashSet<Integer> numSet = new HashSet<>(sortedSet);
-        int maxLength = 0;
-        for (int num : sortedSet) {
-            int length = 0;
-            long current = num;
-            
-            while (current <= Integer.MAX_VALUE && numSet.contains((int)current)) {
-                length++;
-                current = current * current;
-            }
-            
-            if (length > 1) 
-                maxLength = Math.max(maxLength, length);
+        int result = -1;
+        final int max = 100000;
+        boolean[] isExisted = new boolean[max + 1];
+        boolean[] isVisited = new boolean[max + 1];
+        for (int num : nums) {
+            isExisted[num] = true;
         }
-        
-        return maxLength > 1 ? maxLength : -1;
+        for (int i = 2; i * i <= max; i++) {
+            if (!isExisted[i] || isVisited[i]) {
+                continue;
+            }
+            isVisited[i] = true;
+            int length = 1;
+            int j = i * i;
+            while (j >= 0 && j <= max && isExisted[j]) {
+                isVisited[j] = true;
+                length++;
+                j = j * j;
+            }
+            if (length > 1) {
+                result = Math.max(result, length);
+            }
+        }
+        return result;
     }
 }
