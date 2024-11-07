@@ -1,11 +1,9 @@
 class Solution {
     public int minChanges(String s) {
-        int count = 0;
-        char[] ch = s.toCharArray();
-        for (int i = 0; i < ch.length - 1; i += 2) 
-            if (ch[i] != ch[i + 1])
-                count++;
-            
-        return count;
+        int ans = 0;
+        for(int i = 1; i < s.length(); i += 2) {
+            ans += s.charAt(i - 1) + s.charAt(i) - 2 & 1;
+        }
+        return ans;
     }
 }
