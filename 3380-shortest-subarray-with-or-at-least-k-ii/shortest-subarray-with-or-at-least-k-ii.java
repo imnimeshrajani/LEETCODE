@@ -1,37 +1,21 @@
 class Solution {
     public int minimumSubarrayLength(int[] nums, int k) {
-        int n = nums.length;
-        int[] bitCount = new int[32];
-        int currentOR = 0;
-        int left = 0;
-        int minLength = Integer.MAX_VALUE;
-        
-        for (int right = 0; right < n; right++) {
-            currentOR |= nums[right];
+        int w = 0, min = Integer.MAX_VALUE, bits[] = new int[32];
+        for (int l = 0, r = 0; r < nums.length; r++) {
+            if (nums[r] >= k) return 1;
+            w |= nums[r];
+            for (int i = 0; i < bits.length; i++) 
+                bits[i] += (nums[r] >> i) & 1;
             
-            for (int bit = 0; bit < 32; bit++) {
-                if ((nums[right] & (1 << bit)) != 0) {
-                    bitCount[bit]++;
+            while (w >= k) {
+                min = Math.min(min, r - l + 1);
+                for (int i = 0; i < bits.length; i++) {
+                    bits[i] -= (nums[l] >> i) & 1;
+                    if (bits[i] == 0) w &= ~(1 << i);
                 }
-            }
-            
-            while (left <= right && currentOR >= k) {
-                minLength = Math.min(minLength, right - left + 1);
-                
-                int updatedOR = 0;
-                for (int bit = 0; bit < 32; bit++) {
-                    if ((nums[left] & (1 << bit)) != 0) {
-                        bitCount[bit]--;
-                    }
-                    if (bitCount[bit] > 0) {
-                        updatedOR |= (1 << bit);
-                    }
-                }
-                currentOR = updatedOR;
-                left++;
-            }
+                l++;
+            } 
         }
-        
-        return minLength == Integer.MAX_VALUE ? -1 : minLength;
+        return min == Integer.MAX_VALUE ? -1 : min;
     }
 }
