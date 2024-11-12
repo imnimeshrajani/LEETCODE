@@ -5,7 +5,10 @@ class Solution {
         TreeMap<Integer, Integer> map = new TreeMap<>();
         map.put(0,0);
         for(int[] item : items) {
-            max = Math.max(max, item[1]);
+            if (item[1] <= max) {
+                continue;
+            }
+            max =  item[1];
             map.put(item[0], max);
         }
         int[] ans = new int[queries.length];
