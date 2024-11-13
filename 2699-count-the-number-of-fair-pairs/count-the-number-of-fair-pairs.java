@@ -6,10 +6,13 @@ class Solution {
 
     long helper(int[] nums, int sum) {
         long ans = 0;
-        for(int i = 0, j = nums.length - 1; i < j; i++) {
-            while(i < j && nums[i] + nums[j] > sum) j--;
-            ans += j - i;
-        }
+        int start = 0, end = nums.length - 1;
+            while(start < end) {
+                if(nums[start] + nums[end] <= sum) {
+                    ans += end - start;
+                    start++;
+                } else end--;
+            }
         return ans;
     }
 }
