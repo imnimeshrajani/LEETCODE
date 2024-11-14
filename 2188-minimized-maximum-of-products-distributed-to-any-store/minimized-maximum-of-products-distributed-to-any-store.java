@@ -2,7 +2,7 @@ class Solution {
     public int minimizedMaximum(int n, int[] quantities) {
         int start = 1, end = 100000, ans = -1;
         while(start <= end) {
-            int mid = (end + start) / 2;
+            int mid = start + (end - start) / 2;
             if(isPossible(mid, quantities, n)) {
                 ans = mid;
                 end = --mid;
