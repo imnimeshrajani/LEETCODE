@@ -4,11 +4,10 @@ class Solution {
         while(start <= end) {
             int mid = start + (end - start) / 2;
             if(isPossible(mid, quantities, n)) {
-                ans = mid;
                 end = --mid;
             } else start = ++mid;
         }
-        return ans;
+        return start;
     }
 
     boolean isPossible(int div, int[] arr, int n) {
