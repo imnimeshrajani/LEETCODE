@@ -6,7 +6,7 @@ class Solution {
 			for (int j = n - 1, k = n - 1; j >= 0; --j) {
 				res[j][m - i - 1] = '.';
 				if (box[i][j] != '.') {
-					k = box[i][j] == '*' ? j : k;
+					if(box[i][j] == '*') k = j;
 					res[k--][m - i - 1] = box[i][j];
 				}
 			}
