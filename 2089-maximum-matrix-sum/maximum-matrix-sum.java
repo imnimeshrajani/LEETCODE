@@ -5,8 +5,9 @@ class Solution {
         for(int[] row : matrix) {
             for(int col : row) {
                 if(col < 0) negative++;
-                ans += Math.abs(col);
-                if(min > Math.abs(col)) min = Math.abs(col);
+                int max = Math.abs(col);
+                ans += max;
+                if(min > max) min = max;
             }
         }
         return (negative % 2 == 0) ? ans : ans - 2 * min;
