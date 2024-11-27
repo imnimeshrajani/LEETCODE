@@ -1,19 +1,19 @@
 class Solution {
-    private void updateDistances(List<List<Integer>> graph, int current, int[] distances) {
-        int newDist = distances[current] + 1;
+    private void updateDistances(List<List<Integer>> graph, int curr, int[] dist) {
+        int newDist = dist[curr] + 1;
         
-        for (int neighbor : graph.get(current)) {
-            if (distances[neighbor] <= newDist) continue;
+        for (int neighbor : graph.get(curr)) {
+            if (dist[neighbor] <= newDist) continue;
             
-            distances[neighbor] = newDist;
-            updateDistances(graph, neighbor, distances);
+            dist[neighbor] = newDist;
+            updateDistances(graph, neighbor, dist);
         }
     }
     
     public int[] shortestDistanceAfterQueries(int n, int[][] queries) {
-        int[] distances = new int[n];
+        int[] dist = new int[n];
         for (int i = 0; i < n; ++i) {
-            distances[i] = n - 1 - i;
+            dist[i] = n - 1 - i;
         }
         
         List<List<Integer>> graph = new ArrayList<>();
@@ -33,10 +33,10 @@ class Solution {
             int target = query[1];
             
             graph.get(target).add(source);
-            distances[source] = Math.min(distances[source], distances[target] + 1);
-            updateDistances(graph, source, distances);
+            dist[source] = Math.min(dist[source], dist[target] + 1);
+            updateDistances(graph, source, dist);
             
-            answer[queryIdx++] = distances[0];
+            answer[queryIdx++] = dist[0];
         }
         
         return answer;
