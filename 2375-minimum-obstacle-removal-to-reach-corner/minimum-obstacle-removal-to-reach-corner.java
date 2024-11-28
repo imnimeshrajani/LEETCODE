@@ -1,49 +1,40 @@
-class Solution {
-    int n,m;
-    int []dx = new int[]{0,0,1,-1};
-    int []dy = new int[]{1,-1,0,0};
-    int [][]dp;
-    int [][]grid;
-    private boolean isValid(int i, int j, int cost) {
-        boolean valid = (Math.min(i,j)>=0 && i<n && j<m && dp[i][j]>cost+grid[i][j]);
-        if(valid) dp[i][j]=cost+grid[i][j];
-        return valid;
-    }
-    
+public class Solution {
+    public int[][] dir = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+
     public int minimumObstacles(int[][] grid) {
-        this.grid = grid;
-        this.n = grid.length;
-        this.m = grid[0].length;
-        dp = new int[n][m];
-        for(int []row:dp)Arrays.fill(row,Integer.MAX_VALUE);
-        
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{0,0,0});
-        int res = n*m+1;
-        
-        while(!queue.isEmpty()) {
-            int thisLevel = queue.size();
-            while(thisLevel-->0 ) {
-                int []temp = queue.remove();
-                int i=temp[0], j=temp[1];
-                if(i==n-1 && j == m-1) {
-                    res = Math.min(res, temp[2]);
-                    continue;
-                }
-                
-                if(temp[2]>dp[i][j]) {
-                    continue;
-                }
-                
-               for(int k=0;k<4;k++) {
-                    int newI = i+dx[k], newJ = j+dy[k];
-                   
-                    if(isValid(newI, newJ, temp[2])) {
-                        queue.add(new int[]{newI, newJ, dp[newI][newJ]});
-                    }
+        int n = grid.length;
+        int m = grid[0].length;
+
+        Deque<int[]> dq = new ArrayDeque<>();
+        dq.add(new int[]{0, 0, 0}); 
+        grid[0][0] = -1; 
+
+        while (!dq.isEmpty()) {
+            int[] temp = dq.pollFirst();
+            int r = temp[0], c = temp[1], obstacle = temp[2];
+
+            if (r == n - 1 && c == m - 1) 
+                return obstacle;
+
+            for (int[] d : dir) {
+                int row = r + d[0];
+                int col = c + d[1];
+
+                if (isValid(row, col, n, m) && grid[row][col] != -1) {
+                    if (grid[row][col] == 0) 
+                        dq.addFirst(new int[]{row, col, obstacle});
+                        else 
+                        dq.addLast(new int[]{row, col, obstacle + 1});
+                    
+                    grid[row][col] = -1;
                 }
             }
         }
-        return res;
+
+        return -1;
+    }
+
+    public boolean isValid(int i, int j, int n, int m) {
+        return i >= 0 && j >= 0 && i < n && j < m;
     }
 }
