@@ -1,18 +1,19 @@
 class Solution {
     public boolean[] isArraySpecial(int[] nums, int[][] queries) {
-        boolean[] ans = new boolean[queries.length];
-        int[] ps = new int[nums.length];
+        int[] prefix = new int[nums.length];
         for(int i=1;i<nums.length;i++){
-            ps[i] = ps[i-1];
-            if(nums[i-1]%2 == nums[i]%2){
-                ps[i]++;
+            if((nums[i]-nums[i-1])%2==0){
+                prefix[i] = prefix[i-1]+1;
+            } else {
+                prefix[i] = prefix[i-1];
             }
         }
+        boolean[] res = new boolean[queries.length];
         for(int i=0;i<queries.length;i++){
-            int from = queries[i][0],to = queries[i][1];
-            int cnt = ps[to] - ps[from];
-            ans[i] = cnt>0 ? false : true;
+           int start = queries[i][0], end = queries[i][1];
+           if(prefix[end]==prefix[start])
+           res[i] = true;
         }
-        return ans;
+        return res;
     }
 }
