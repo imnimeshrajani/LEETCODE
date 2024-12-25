@@ -14,17 +14,23 @@
  * }
  */
 class Solution {
+    List<Integer> ans;
     public List<Integer> largestValues(TreeNode root) {
-       Map <Integer , Integer> map = new HashMap(); 
-       dfs(root, 0, map);
-       return new ArrayList(map.values());
+        ans = new ArrayList<>();
+        dfs(root, 0);
+        return ans;
     }
 
-    private void dfs(TreeNode root, int level, Map<Integer , Integer> map){
-        if(root==null) return;
-
-        map.put(level, Math.max(root.val, map.getOrDefault(level, Integer.MIN_VALUE)));
-        dfs(root.left, level+1, map);
-        dfs(root.right, level+1, map);
+    private void dfs(TreeNode node, int l) {
+        if(node != null) {
+            int v = node.val;
+            if(l == ans.size()) {
+                ans.add(v);
+            } else {
+                ans.set(l, Math.max(ans.get(l), v));
+            }
+            dfs(node.left, l + 1);
+            dfs(node.right, l + 1);
+        }
     }
 }
