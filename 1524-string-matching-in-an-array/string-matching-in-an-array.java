@@ -1,15 +1,27 @@
 class Solution {
     public List<String> stringMatching(String[] words) {
-        List<String> ans = new ArrayList<>();
-        for(int i = 0; i < words.length; i++) {
+        List<String> result = new ArrayList<>();
+
+        for (int i = 0; i < words.length; i++) {
             String curr = words[i];
-            for(int j = 0; j < words.length; j++) {
-                if(j != i && words[j].indexOf(words[i]) != -1) {
-                    ans.add(words[i]);
-                    break;
-                }
-            }
+            if (isSubstringOfSomeoneButIt(words, curr, i)) 
+                result.add(curr);
+            
         }
-        return ans;
+
+        return result;
+    }
+
+    private static boolean isSubstringOfSomeoneButIt(String[] words, String curr, int indexToExclude) {
+        for (int j = 0; j < words.length; j++) {
+            if (j == indexToExclude)
+                continue;
+            String other = words[j];
+            if (other.contains(curr))
+                return true;
+            
+        }
+
+        return false;
     }
 }
