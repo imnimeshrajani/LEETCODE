@@ -1,29 +1,36 @@
 class Solution {
-    public int[][] highestPeak(int[][] isWater) {
-        int n = isWater.length, m = isWater[0].length;
-        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}, mat = new int[n][m];
-        Queue<int[]> queue = new LinkedList<>();
-        for (int i = 0; i < n; i++) {
-             Arrays.fill(mat[i], -1);
-            for (int j = 0; j < m; j++) {
-               
-                if (isWater[i][j] == 1) {
-                    mat[i][j] = 0;
-                    queue.add(new int[]{i, j});
+    public int[][] highestPeak(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int maxVal = 2000;
+        for (int r = 0; r < m; r++) {
+            for (int c = 0; c < n; c++) {
+                if (matrix[r][c] == 1) matrix[r][c] = 0;
+                else matrix[r][c] = 1;
+            }
+        }
+        for (int r = 0; r < m; r++) {
+            for (int c = 0; c < n; c++) {
+                if (matrix[r][c] != 0) {
+                    int top = maxVal;
+                    int left = maxVal;
+                    if (r - 1 >= 0) top = matrix[r - 1][c];
+                    if (c - 1 >= 0) left = matrix[r][c - 1];
+                    matrix[r][c] = Math.min(top, left) + 1;
                 }
             }
         }
-        
-        while (!queue.isEmpty()) {
-            int[] cur = queue.poll();
-            for (int[] dir : dirs) {
-                int x = cur[0] + dir[0];
-                int y = cur[1] + dir[1];
-                if (x < 0 || y < 0 || x >= n || y >= m || mat[x][y] != -1) continue;
-                mat[x][y] = mat[cur[0]][cur[1]] + 1;
-                queue.add(new int[]{x, y});
+        for (int r = m - 1; r >= 0; r--) {
+            for (int c = n - 1; c >= 0; c--) {
+                if (matrix[r][c] != 0) {
+                    int bottom = maxVal;
+                    int right = maxVal;
+                    if (r + 1 < m) bottom = matrix[r + 1][c];
+                    if (c + 1 < n) right = matrix[r][c + 1];
+                    matrix[r][c] = Math.min(matrix[r][c], Math.min(bottom, right) + 1);
+                }
             }
         }
-        return mat;
+        return matrix;
     }
 }
