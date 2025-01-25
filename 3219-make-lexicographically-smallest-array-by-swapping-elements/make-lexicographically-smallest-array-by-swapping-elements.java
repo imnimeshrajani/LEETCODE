@@ -1,54 +1,44 @@
-
-
 class Solution {
     public int[] lexicographicallySmallestArray(int[] nums, int limit) {
         int n = nums.length;
-        Pair[] a = new Pair[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = new Pair(nums[i], i);
-        }
-        
-        Arrays.sort(a, (p1, p2) -> Integer.compare(p1.val, p2.val));
-        
-        List<Integer>[] x = new ArrayList[n];
-        List<Integer>[] y = new ArrayList[n];
-        for (int i = 0; i < n; i++) {
-            x[i] = new ArrayList<>();
-            y[i] = new ArrayList<>();
-        }
-        
-        int j = 0, cur = a[0].val;
-        x[j].add(a[0].val);
-        y[j].add(a[0].idx);
-        for (int i = 1; i < n; i++) {
-            if (a[i].val - cur > limit) {
-                j++;
-            }
-            x[j].add(a[i].val);
-            y[j].add(a[i].idx);
-            cur = a[i].val;
-        }
-        
-        for (int i = 0; i < n; i++) {
-            Collections.sort(y[i]);
-        }
-        
-        int[] res = new int[n];
-        for (int i = 0; i < n; i++) {
-            for (int k = 0; k < x[i].size(); k++) {
-                res[y[i].get(k)] = x[i].get(k);
+
+
+        class Pair {
+            int index, value;
+            Pair(int index, int value) {
+                this.index = index;
+                this.value = value;
             }
         }
-        
-        return res;
-    }
-    
-    class Pair {
-        int val, idx;
-        Pair(int val, int idx) {
-            this.val = val;
-            this.idx = idx;
+
+        Pair[] pairs = new Pair[n];
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            pairs[i] = new Pair(i, nums[i]);
         }
+
+
+        Arrays.sort(pairs, (a, b) -> a.value - b.value);
+
+
+        Pair[] ids = Arrays.copyOf(pairs, n);
+
+        int i = 0;
+        while (i < n) {
+            int j = i;
+            i++;
+
+            while (i < n && pairs[i].value - pairs[i - 1].value <= limit) {
+                i++;
+            }
+
+            Arrays.sort(ids, j, i, (a, b) -> a.index - b.index);
+
+            for (int k = j; k < i; k++) {
+                ans[ids[k].index] = pairs[k].value;
+            }
+        }
+
+        return ans;
     }
 }
-
