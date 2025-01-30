@@ -1,81 +1,84 @@
-import java.util.*;
-
 class Solution {
     public int magnificentSets(int n, int[][] edges) {
         List<List<Integer>> adj = new ArrayList<>();
-        for (int i = 0; i <= n; i++) {
+        n++;
+        for(int i = 0; i < n; i++)
             adj.add(new ArrayList<>());
+        for(int edg[] : edges)
+        {
+            adj.get(edg[0]).add(edg[1]);
+            adj.get(edg[1]).add(edg[0]);
         }
-        for (int[] e : edges) {
-            int a = e[0], b = e[1];
-            adj.get(a).add(b);
-            adj.get(b).add(a);
-        }
 
-        int[] color = new int[n + 1];
-        Arrays.fill(color, -1);
-        int total = 0;
+        if(!isBipartite(adj, n))
+            return -1;
 
-        for (int i = 1; i <= n; i++) {
-            if (color[i] == -1) {
-                Queue<Integer> q = new LinkedList<>();
-                q.add(i);
-                color[i] = 0;
-                List<Integer> component = new ArrayList<>();
-                component.add(i);
-                boolean isBipartite = true;
+        int degreeBFS[] = new int[n];
+        for(int i = 1; i < n; i++)
+            degreeBFS[i] = bfsdegree(adj, i);
 
-                while (!q.isEmpty()) {
-                    int current = q.poll();
-                    for (int neighbor : adj.get(current)) {
-                        if (color[neighbor] == -1) {
-                            color[neighbor] = color[current] ^ 1;
-                            q.add(neighbor);
-                            component.add(neighbor);
-                        } else if (color[neighbor] == color[current]) {
-                            isBipartite = false;
-                        }
-                    }
-                }
+        int vis[] = new int[n];
+        int grp = 0;
+        for(int i = 1; i < n; i++)
+            if(vis[i] == 0)
+                grp += dfs(adj, vis, degreeBFS, i);
 
-                if (!isBipartite) {
-                    return -1;
-                }
-
-                Set<Integer> compSet = new HashSet<>(component);
-                int maxDiameter = 0;
-                for (int node : component) {
-                    int[] res = bfs(node, adj, compSet);
-                    maxDiameter = Math.max(maxDiameter, res[1]);
-                }
-                total += maxDiameter + 1;
-            }
-        }
-        return total;
+        return grp;
     }
 
-    private int[] bfs(int start, List<List<Integer>> adj, Set<Integer> component) {
-        int[] distance = new int[adj.size()];
-        Arrays.fill(distance, -1);
-        Queue<Integer> q = new LinkedList<>();
-        q.add(start);
-        distance[start] = 0;
-        int maxDist = 0;
-        int farthestNode = start;
+    public int dfs(List<List<Integer>> adj,int vis[], int deg[], int vertex) {
+        vis[vertex] = 1;
+        int componentMax = deg[vertex];
+        for(int ver : adj.get(vertex))
+            if(vis[ver] == 0)
+                componentMax = Math.max(componentMax, dfs(adj, vis, deg, ver));
+        return componentMax;
+    }
 
-        while (!q.isEmpty()) {
-            int current = q.poll();
-            for (int neighbor : adj.get(current)) {
-                if (component.contains(neighbor) && distance[neighbor] == -1) {
-                    distance[neighbor] = distance[current] + 1;
-                    q.add(neighbor);
-                    if (distance[neighbor] > maxDist) {
-                        maxDist = distance[neighbor];
-                        farthestNode = neighbor;
-                    }
+    public int bfsdegree(List<List<Integer>> adj, int vertex) {
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{vertex, 1});
+        int vis[] = new int[adj.size()];
+        vis[vertex] = 1;
+        int ele[] = new int[2];
+        while(!q.isEmpty())
+        {
+            ele = q.poll();
+            for(int ver : adj.get(ele[0]))
+                if(vis[ver] == 0)
+                {
+                    vis[ver] = 1;
+                    q.add(new int[]{ver, ele[1] + 1});
                 }
-            }
         }
-        return new int[]{farthestNode, maxDist};
+        return ele[1];
+    }
+
+    public boolean isBipartite(List<List<Integer>> adj, int n) {
+        int color[] = new int[n];
+        for(int i = 0; i < n; i++)
+            if(color[i] == 0 && !bfs(adj, color, i))
+                return false;
+        return true;
+    }
+
+    public boolean bfs(List<List<Integer>> adj, int color[], int vertex) {
+        color[vertex] = 1;
+        Queue<Integer> q = new LinkedList<>();
+        q.add(vertex);
+        while(!q.isEmpty())
+        {
+            int ele = q.poll();
+            int col = color[ele] == 1 ? 2 : 1;
+            for(int ver : adj.get(ele))
+                if(color[ver] == 0)
+                {
+                    color[ver] = col;
+                    q.add(ver);
+                }
+                else if(color[ver] != col)
+                    return false;
+        }
+        return true;
     }
 }
