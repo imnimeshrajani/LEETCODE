@@ -1,15 +1,26 @@
 class Solution {
     public List<List<Integer>> groupThePeople(int[] groupSizes) {
-        List<List<Integer>> ans = new ArrayList<>();
-        Map<Integer, List<Integer>> map = new HashMap<>();
-        for(int i = 0; i < groupSizes.length; i++) {
-            int groupSize = groupSizes[i];
-            map.computeIfAbsent(groupSize, k -> new ArrayList<>()).add(i);
-            if(map.get(groupSize).size() == groupSize) {
-                ans.add(List.copyOf(map.get(groupSize)));
-                map.get(groupSize).clear();
-            }
+        List<List<Integer>> result = new ArrayList<>();
+        HashMap<Integer, List<Integer>> groups = new HashMap<>();
+        for (int person = 0; person < groupSizes.length; person++) {
+            int size = groupSizes[person];
+            addToGroup(size, person, groups, result);
         }
-        return ans;
+        return result;
+    }
+
+    public void addToGroup(int size, int person, HashMap<Integer, List<Integer>> groups, List<List<Integer>> result) {
+        List<Integer> group = groups.get(size);            
+        if (group == null) {
+            group = new ArrayList<Integer>();
+            groups.put(size, group);
+        }
+
+        group.add(person);
+
+        if (group.size() == size) {
+            groups.remove(size);
+            result.add(group);
+        }
     }
 }
