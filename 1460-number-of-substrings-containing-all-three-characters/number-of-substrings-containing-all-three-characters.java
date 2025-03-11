@@ -1,14 +1,19 @@
 class Solution {
     public int numberOfSubstrings(String s) {
-        int[] track = new int[3];
-        int ans = 0, start = 0;
-        for(int i = 0; i < s.length(); i++) {
-            track[s.charAt(i) - 'a']++;
-            while (track[0] > 0 && track[1] > 0 && track[2] > 0) {
-                ans += s.length() - i;
-                track[s.charAt(start++) - 'a']--;
+        char[] ch = s.toCharArray();
+        int[] abc = new int[] {-1, -1, -1};
+        int count = 0, right = 0;
+        while(right < ch.length)
+        {
+            abc[ch[right] - 'a'] = right;
+            int min = Integer.MAX_VALUE;
+            for(int i=0; i<3; i++)
+            {
+                min = Math.min(min, abc[i]);
             }
+            count += (min+1);
+            right++;
         }
-        return ans;
+        return count;
     }
 }
