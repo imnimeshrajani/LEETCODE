@@ -4,12 +4,9 @@ class Solution {
         for(int i = 0; i < nums.length;) {
             if((res & nums[i]) == 0) {
                 res ^= nums[i];
-                max = Math.max(max, i - j + 1);
-                i++;
-
+                max = Math.max(max, i++ - j + 1);
             } else {
-                res ^= nums[j];
-                j++;
+                res ^= nums[j++];
             }
         }
         return max;
