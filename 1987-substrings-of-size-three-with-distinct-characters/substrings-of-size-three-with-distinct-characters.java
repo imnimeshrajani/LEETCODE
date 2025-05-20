@@ -18,12 +18,12 @@ class Solution {
 
             if(unique == 3) {
                 ans++;
-                System.out.println("unique: " + unique);
+                // System.out.println("unique: " + unique);
             }
             end++;
             
 
-            System.out.println(Arrays.toString(arr));
+            // System.out.println(Arrays.toString(arr));
         }
         return ans;
     }
