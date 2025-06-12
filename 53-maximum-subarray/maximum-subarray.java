@@ -7,7 +7,6 @@ class Solution {
                 sum = 0;
             } else {
                 sum += val;
-                System.out.println(sum);
                 maxSum = Math.max(sum, maxSum);
             }
         }
